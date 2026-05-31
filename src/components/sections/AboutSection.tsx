@@ -2,6 +2,7 @@ import { motion, useInView, useMotionValue, animate } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 import { FiBookOpen, FiCode, FiMapPin, FiClock } from "react-icons/fi";
 import { FaComputer } from "react-icons/fa6";
+import AnimatedLightningBackground from "../ui/AnimatedLightningBackground";
 
 /**
  * AboutSection.tsx
@@ -229,10 +230,15 @@ export default function AboutSection() {
         backgroundColor: "#0A0A0A",
         padding: "clamp(64px, 8vw, 96px) clamp(16px, 5vw, 40px)",
         minHeight: "200px",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      <AnimatedLightningBackground />
       <div
         style={{
+          position: "relative",
+          zIndex: 1,
           maxWidth: "1200px",
           marginLeft: "auto",
           marginRight: "auto",
