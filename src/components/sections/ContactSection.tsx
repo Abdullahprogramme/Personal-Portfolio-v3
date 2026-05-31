@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import emailjs from "@emailjs/browser";
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import CyberNode from "../ui/CyberNode";
 
 export default function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -103,6 +104,9 @@ export default function ContactSection() {
                 <FiLinkedin size={24} />
               </a>
             </div>
+
+            {/* Custom High-Tech Cyber Node Component */}
+            <CyberNode />
           </motion.div>
 
           {/* Right Column: Form */}
