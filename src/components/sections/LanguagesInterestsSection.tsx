@@ -164,7 +164,7 @@ export default function LanguagesInterestsSection() {
 
         <style>{`
           .interest-box:hover .interest-icon {
-            color: #E8FF00 !important;
+            color: #111111 !important;
           }
         `}</style>
       </div>
