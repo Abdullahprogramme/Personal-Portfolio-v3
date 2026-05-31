@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView, animate } from "motion/react";
 import { ACHIEVEMENTS_DATA, type AchievementItem } from "../../data/achievements";
+import AnimatedLightningBackground from "../ui/AnimatedLightningBackground";
 
 export default function AchievementsSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -13,9 +14,12 @@ export default function AchievementsSection() {
       style={{
         backgroundColor: "#0A0A0A",
         padding: "clamp(64px, 8vw, 96px) clamp(16px, 5vw, 40px)",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+      <AnimatedLightningBackground />
+      <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
         {/* Section Label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
