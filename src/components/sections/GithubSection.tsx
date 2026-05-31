@@ -3,6 +3,8 @@ import { motion, useInView } from "motion/react";
 import { GitHubCalendar } from "react-github-calendar";
 import { FiStar, FiBook, FiCode } from "react-icons/fi";
 
+import AnimatedLightningBackground from "../ui/AnimatedLightningBackground";
+
 const GITHUB_USERNAME = "abdullahprogramme";
 
 export default function GithubSection() {
@@ -57,9 +59,12 @@ export default function GithubSection() {
       style={{
         backgroundColor: "#0A0A0A",
         padding: "clamp(64px, 8vw, 96px) clamp(16px, 5vw, 40px)",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+      <AnimatedLightningBackground />
+      <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
         {/* Section Label */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
