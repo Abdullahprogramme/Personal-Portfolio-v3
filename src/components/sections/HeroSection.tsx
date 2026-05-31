@@ -348,23 +348,46 @@ export default function HeroSection() {
             />
           </motion.div>
 
-          {/* Typewriter Role */}
+          {/* Typewriter Role — styled as a premium compact Code Block */}
           <motion.div
             {...enterVariant(0.4)}
             style={{
-              height: "32px",
+              marginTop: "8px",
+              backgroundColor: "#111111",
+              border: "1px solid rgba(232, 255, 0, 0.15)",
+              borderRadius: "6px",
+              padding: "10px 14px",
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "clamp(12px, 1.8vw, 14px)",
+              lineHeight: 1.4,
+              color: "#888888",
+              boxShadow: "0 10px 25px rgba(0, 0, 0, 0.4)",
+              position: "relative",
+              overflow: "hidden",
+              maxWidth: "400px",
+              width: "100%",
               display: "flex",
               alignItems: "center",
-              marginTop: "4px",
+              gap: "8px",
             }}
           >
-            <TypewriterHeadline
-              strings={ROLES}
-              typingSpeed={60}
-              deleteSpeed={30}
-              pauseAt={2000}
-              className=""
-            />
+            {/* Minimal glowing status indicator */}
+            <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#E8FF00", opacity: 0.7 }} />
+            
+            {/* One-liner Code Representation */}
+            <div style={{ whiteSpace: "nowrap" }}>
+              <span style={{ color: "#E8FF00", opacity: 0.8 }}>const</span> <span style={{ color: "#F0F0F0" }}>role</span> = <span style={{ color: "#98C379" }}>"</span>
+              <span style={{ display: "inline-flex", fontWeight: 600 }}>
+                <TypewriterHeadline
+                  strings={ROLES}
+                  typingSpeed={60}
+                  deleteSpeed={30}
+                  pauseAt={2000}
+                  style={{ color: "#E8FF00" }}
+                />
+              </span>
+              <span style={{ color: "#98C379" }}>"</span>;
+            </div>
           </motion.div>
 
           {/* Bio */}
