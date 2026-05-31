@@ -1,6 +1,7 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import SkillGrid from "../ui/SkillGrid";
+import AnimatedLightningBackground from "../ui/AnimatedLightningBackground";
 
 /**
  * SkillsSection.tsx
@@ -20,10 +21,15 @@ export default function SkillsSection() {
         backgroundColor: "#0A0A0A",
         padding: "clamp(64px, 8vw, 96px) clamp(16px, 5vw, 40px)",
         minHeight: "200px",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      <AnimatedLightningBackground />
       <div
         style={{
+          position: "relative",
+          zIndex: 1,
           maxWidth: "1200px",
           marginLeft: "auto",
           marginRight: "auto",
