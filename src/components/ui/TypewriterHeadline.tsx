@@ -16,6 +16,7 @@ interface TypewriterProps {
   deleteSpeed?: number;
   pauseAt?: number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export default function TypewriterHeadline({
@@ -24,6 +25,7 @@ export default function TypewriterHeadline({
   deleteSpeed = 30,
   pauseAt = 2000,
   className = "",
+  style = {},
 }: TypewriterProps) {
   const [displayText, setDisplayText] = useState("");
   const [stringIndex, setStringIndex] = useState(0);
@@ -69,8 +71,9 @@ export default function TypewriterHeadline({
     <span
       className={className}
       style={{
-        fontFamily: "'Inter', sans-serif",
-        fontSize: "clamp(14px, 2.5vw, 18px)",
+        fontFamily: "inherit",
+        fontSize: "inherit",
+        ...style,
       }}
     >
       <span style={{ color: "#F0F0F0" }}>{displayText}</span>
