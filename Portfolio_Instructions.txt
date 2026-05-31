@@ -1,0 +1,1436 @@
+================================================================================
+                   PERSONAL PORTFOLIO — PROJECT INSTRUCTIONS
+================================================================================
+
+Tech Stack: Astro JS · TypeScript · Motion (motion.dev) · Tailwind CSS · Spline
+
+################################################################################
+## Project Description
+################################################################################
+
+This is a personal portfolio website rebuilt from scratch using a modern,
+performance-first tech stack. The previous version was built on Create React App
+and relied on a heavy set of redundant animation and UI libraries. The new
+version strips all of that back and replaces it with a single, cohesive design
+language: solid-colour box-based aesthetics, no gradients, purposeful motion,
+and a typographic identity that feels editorial and technical at the same time.
+
+The site is a single-page application built with Astro JS (with islands for
+interactive React/TypeScript components where needed). All animation is driven
+exclusively by Motion (motion.dev) — no Framer Motion, no React Spring, no
+GSAP. Layout is handled by Tailwind CSS. Spline is used for one focused 3D
+scene in the Hero section. Email contact is powered by EmailJS (free tier),
+the same provider used in the old stack.
+
+The visual identity is built around: hard rectangular blocks, solid fills (no
+gradients ever), a monochromatic palette anchored in near-black and off-white
+with a single electric accent, and deliberate whitespace. Every animation has
+a purpose — it either reveals content, guides attention, or communicates state.
+Nothing is decorative noise.
+
+################################################################################
+## Tech Stack
+################################################################################
+
+------------------------------------------------------------------------
+Core Framework
+------------------------------------------------------------------------
+
+  - Astro JS (latest stable) — static-first, islands architecture
+  - TypeScript — strict mode, all components typed
+  - Astro's built-in asset pipeline for optimised images
+
+------------------------------------------------------------------------
+Styling
+------------------------------------------------------------------------
+
+  - Tailwind CSS v4 — utility-first, JIT, no arbitrary CSS files except globals
+  - No CSS-in-JS, no styled-components, no CSS modules
+  - Custom Tailwind config for design tokens (colours, fonts, spacing)
+
+------------------------------------------------------------------------
+Animation
+------------------------------------------------------------------------
+
+  - Motion (motion.dev) — the ONLY animation library. Replaces all of:
+      * framer-motion, react-spring, react-intersection-observer, react-scroll
+  - Used for: entrance animations, scroll-driven effects, gestures, layout
+    transitions, drag interactions, and progress tracking
+
+------------------------------------------------------------------------
+3D / Canvas
+------------------------------------------------------------------------
+
+  - Spline — one scene in the Hero section, loaded via @splinetool/react-spline
+  - Scene is lazy-loaded behind an Intersection Observer to avoid blocking LCP
+  - Three.js is NOT used directly — Spline handles the 3D runtime
+
+------------------------------------------------------------------------
+Contact / Email
+------------------------------------------------------------------------
+
+  - EmailJS (free tier) — same provider as old stack, zero backend required
+  - Service ID, Template ID, and Public Key stored in .env
+  - Template receives: from_name, from_email, message
+  - Client-side validation before send; success/error state shown inline
+
+------------------------------------------------------------------------
+Libraries Retained (Purpose-Specific)
+------------------------------------------------------------------------
+
+  - react-github-calendar    : GitHub contribution grid (no suitable replacement)
+  - @radix-ui/react-tooltip  : Accessible tooltips on Skill tag hover
+  - react-icons              : Icon sets (Lucide / Simple Icons subset)
+
+------------------------------------------------------------------------
+Libraries Dropped Entirely
+------------------------------------------------------------------------
+
+  - react-scripts, react-lottie, react-tsparticles, react-typed
+  - react-slick, slick-carousel, react-water-wave, ccapture.js
+  - react-scroll, react-spring, framer-motion
+  - react-intersection-observer (replaced by Motion scroll utilities)
+  - react-vertical-timeline-component (replaced by custom Timeline.tsx)
+
+################################################################################
+## Colour Palette & Design System
+################################################################################
+
+------------------------------------------------------------------------
+Design Philosophy
+------------------------------------------------------------------------
+
+  NO GRADIENTS. EVER. Every colour value is a solid hex. The palette is
+  intentionally minimal — near-black backgrounds, off-white text, one electric
+  accent. Think: a brutalist design studio's portfolio, not a startup landing
+  page. Boxes are boxes — sharp corners, solid fills, strong borders. The only
+  "softness" is in spacing and animation easing.
+
+------------------------------------------------------------------------
+Primary Palette
+------------------------------------------------------------------------
+
+  --bg-base        : #0A0A0A   /* Page background — near-black              */
+  --bg-surface     : #111111   /* Raised cards, panels                      */
+  --bg-elevated    : #1A1A1A   /* Hovered cards, modals                     */
+  --bg-box         : #141414   /* Default filled box component              */
+
+  --text-primary   : #F0F0F0   /* Headings, primary content                 */
+  --text-secondary : #A0A0A0   /* Subtext, labels, captions                 */
+  --text-muted     : #555555   /* Placeholders, disabled states             */
+
+  --accent         : #E8FF00   /* Electric yellow — ONE accent, used sparingly */
+  --accent-dark    : #B8CC00   /* Accent on hover / pressed                 */
+
+  --border-default : #222222   /* Subtle dividers                           */
+  --border-strong  : #333333   /* Card borders, box outlines                */
+  --border-accent  : #E8FF00   /* Accent-coloured borders (active states)   */
+
+------------------------------------------------------------------------
+Semantic Colours
+------------------------------------------------------------------------
+
+  --color-success  : #39FF14   /* Neon green — completed, positive states   */
+  --color-warning  : #FF9500   /* Amber — in progress, caution              */
+  --color-error    : #FF3B30   /* Red — error states, cancellations         */
+  --color-info     : #0A84FF   /* Blue — informational                      */
+
+------------------------------------------------------------------------
+Accent Usage Rules
+------------------------------------------------------------------------
+
+  The accent (#E8FF00) is used on:
+    - One CTA button per section
+    - Active nav link indicator
+    - Skill tag border on hover
+    - Timeline node dot (square)
+    - Section number labels (e.g. "01 /")
+    - Year labels in Education and Experience
+    - Quote mark in Testimonials
+    - Language proficiency bar fill
+
+  Everything else uses --bg-* and --text-* from the palette above.
+  White (#FFFFFF) is never used. Off-white (#F0F0F0) is the brightest text.
+  No colour is used purely decoratively — every colour communicates state
+  or hierarchy.
+
+------------------------------------------------------------------------
+Typography
+------------------------------------------------------------------------
+
+  Display / Hero headings  :  'Space Grotesk', sans-serif  (weight 700)
+  Body / UI text           :  'Montserrat', sans-serif     (weight 400 / 500)
+  Monospace / code labels  :  'JetBrains Mono', monospace  (weight 400 / 500)
+
+  All three fonts are self-hosted in public/fonts/ and preloaded in <head>.
+
+  Font scale (Tailwind):
+    text-xs   : 12px  — timestamps, metadata
+    text-sm   : 14px  — labels, captions, tags
+    text-base : 16px  — body paragraphs
+    text-lg   : 18px  — lead text, intro paragraphs
+    text-2xl  : 24px  — card titles, section sub-headings
+    text-4xl  : 36px  — section headings
+    text-6xl  : 60px  — hero sub-headline
+    text-8xl  : 96px  — hero main name (Space Grotesk, weight 700)
+
+------------------------------------------------------------------------
+Spacing & Layout
+------------------------------------------------------------------------
+
+  Page max-width         :  max-w-[1200px] centered
+  Section padding        :  py-24 px-6 (desktop) / py-16 px-4 (mobile)
+  Box/card padding       :  p-6 (default) / p-8 (featured)
+  Grid gap               :  gap-4 (tight) / gap-6 (default) / gap-8 (loose)
+  Border radius          :  rounded-none — ALL boxes, zero exceptions
+  Border width           :  border (1px) — all cards have a visible border
+
+------------------------------------------------------------------------
+Box System
+------------------------------------------------------------------------
+
+  Every content block is a "Box". Boxes are rectangular (no rounded corners),
+  filled with --bg-surface, and bordered with --border-strong. On hover, the
+  border colour transitions to --border-accent over 200ms. This single rule
+  gives the site its entire visual identity.
+
+  Three box sizes:
+    Full-width box  — spans the full grid, used for section intros
+    Half box        — lg:grid-cols-2, used for About / Skills
+    Third box       — lg:grid-cols-3, used for project cards / skill items
+
+################################################################################
+## Folder Structure
+################################################################################
+
+  my-portfolio/
+  ├── public/
+  │   ├── fonts/                   # Self-hosted: Space Grotesk, Inter, JetBrains Mono
+  │   ├── spline/                  # Exported .splinecode scene file
+  │   └── og-image.png             # Open Graph social preview
+  │
+  ├── src/
+  │   ├── components/
+  │   │   ├── layout/
+  │   │   │   ├── NavBar.astro
+  │   │   │   └── Footer.astro
+  │   │   │
+  │   │   ├── sections/            # One .astro file per section
+  │   │   │   ├── Hero.astro
+  │   │   │   ├── About.astro
+  │   │   │   ├── Skills.astro
+  │   │   │   ├── Education.astro
+  │   │   │   ├── Experience.astro
+  │   │   │   ├── Certifications.astro
+  │   │   │   ├── Work.astro
+  │   │   │   ├── Achievements.astro
+  │   │   │   ├── Articles.astro
+  │   │   │   ├── Testimonials.astro
+  │   │   │   ├── Github.astro
+  │   │   │   ├── Contact.astro
+  │   │   │   └── LanguagesInterests.astro
+  │   │   │
+  │   │   ├── ui/                  # Reusable React island components
+  │   │   │   ├── SplineHero.tsx           # Spline 3D scene (client:load)
+  │   │   │   ├── HorizontalScroll.tsx     # Horizontal scroll / drag carousel
+  │   │   │   ├── Timeline.tsx             # Vertical timeline (shared)
+  │   │   │   ├── SkillGrid.tsx            # Animated skill boxes with tabs
+  │   │   │   ├── ProjectCarousel.tsx      # Work section grid + scroll toggle
+  │   │   │   ├── TestimonialStack.tsx     # Stacked card + drag interactions
+  │   │   │   ├── GithubCalendar.tsx       # GitHub contribution calendar
+  │   │   │   ├── ContactForm.tsx          # EmailJS contact form
+  │   │   │   ├── TypewriterHeadline.tsx   # Custom typed text (no library)
+  │   │   │   └── CertCarousel.tsx         # Certifications horizontal carousel
+  │   │   │
+  │   │   └── shared/
+  │   │       ├── SectionLabel.astro       # "01 / ABOUT" number label
+  │   │       ├── Box.astro                # Base box component
+  │   │       └── Tag.astro                # Skill / tech tag chip
+  │   │
+  │   ├── data/                    # Static TypeScript data files
+  │   │   ├── skills.ts
+  │   │   ├── experience.ts
+  │   │   ├── education.ts
+  │   │   ├── certifications.ts
+  │   │   ├── projects.ts
+  │   │   ├── testimonials.ts
+  │   │   ├── achievements.ts
+  │   │   ├── articles.ts
+  │   │   └── interests.ts
+  │   │
+  │   ├── layouts/
+  │   │   └── BaseLayout.astro     # HTML shell, font preloads, meta tags
+  │   │
+  │   ├── pages/
+  │   │   └── index.astro          # Assembles all sections in order
+  │   │
+  │   └── styles/
+  │       └── globals.css          # CSS variables, @font-face, base resets
+  │
+  ├── .env                         # EMAILJS_SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY
+  ├── astro.config.mjs
+  ├── tailwind.config.mjs
+  └── package.json
+
+################################################################################
+## Component Designs
+################################################################################
+
+------------------------------------------------------------------------
+1. NavBar
+------------------------------------------------------------------------
+
+LAYOUT:
+  Fixed top bar. Full width, bg-[#0A0A0A], border-bottom border-[#222222].
+  Height: 56px.
+
+  Left side:  Name / logo in JetBrains Mono, text-sm, text-[#F0F0F0].
+  Right side: Nav links in Inter text-sm. Uppercase, letter-spacing: widest.
+              Active link: 2px underline in #E8FF00, underline-offset-4.
+  CTA button: 'HIRE ME' — bg-[#E8FF00] text-[#0A0A0A] px-4 py-1.5 text-xs
+              font-bold. Rightmost element.
+
+  Mobile (<768px): Links collapse into a bottom drawer that slides up.
+  No hamburger icon — a small menu label triggers the drawer.
+
+ANIMATION (Motion):
+  - On mount: navbar slides from y:-56 to y:0, opacity 0→1, duration 0.4s,
+    ease 'easeOut'.
+  - Nav links: 0.05s stagger on initial mount (left-to-right fade-in from
+    opacity 0, y:-8).
+  - 'HIRE ME' button: whileHover scale:1.03, whileTap scale:0.97.
+  - On scroll past 100px: border-bottom transitions from transparent to
+    #222222 (CSS transition, 300ms).
+  - Active link indicator: layoutId-based underline that slides between
+    links on hover/active change (Motion layout animation).
+
+COLOUR SCHEME:
+  Background        :  #0A0A0A
+  Border (scrolled) :  #222222
+  Logo text         :  #F0F0F0
+  Nav links default :  #A0A0A0
+  Nav links hover   :  #F0F0F0
+  Active underline  :  #E8FF00
+  CTA button bg     :  #E8FF00
+  CTA button text   :  #0A0A0A
+
+------------------------------------------------------------------------
+2. Hero
+------------------------------------------------------------------------
+
+LAYOUT:
+  Full viewport height (h-screen). Split layout: left 55%, right 45%.
+
+  Left side (text content):
+    - Section label: '00 / HELLO' in JetBrains Mono text-xs #555555,
+      uppercase tracking-widest.
+    - Name: FIRSTNAME on line 1, LASTNAME on line 2. Space Grotesk 700,
+      text-8xl. FIRSTNAME: #F0F0F0. LASTNAME: #E8FF00 (accent).
+    - Role typewriter: single line cycling 3 roles via TypewriterHeadline.tsx.
+        e.g. 'Software Engineer_', 'Full-Stack Developer_', 'Open Source Contributor_'
+    - Short bio: 1 line, Inter text-base text-[#A0A0A0], max-w-md.
+    - Two CTA buttons side by side:
+        'VIEW WORK'    — bg-[#E8FF00] text-[#0A0A0A] px-6 py-3 text-sm font-bold
+        'DOWNLOAD CV'  — border border-[#333333] text-[#F0F0F0] px-6 py-3 text-sm
+    - Social icons row: GitHub, LinkedIn, Twitter. react-icons, 20px, #555555.
+
+  Right side (Spline):
+    - SplineHero.tsx fills the right column. Scene: abstract geometric
+      shapes or floating letters. Dark background, #E8FF00 accents, minimal
+      polygons. Loaded with client:load inside a Suspense boundary.
+    - On mobile (<768px): Spline hidden, left column goes full-width.
+
+  Scroll indicator (bottom centre): small down-arrow bouncing, absolute
+  positioned, points to next section.
+
+ANIMATION (Motion):
+  - Text reveal: each element (label, name line 1, name line 2, role, bio,
+    buttons, icons) enters from y:40 opacity:0. Stagger 0.1s per element.
+    Duration 0.6s each, ease [0.25, 0.1, 0.25, 1].
+  - Spline container: opacity 0→1, scale 0.95→1, duration 0.8s, delay 0.4s.
+  - 'VIEW WORK' button: whileHover y:-2, whileTap y:1.
+  - Scroll indicator: loop animation, y: 0→10px→0, duration 1.2s, repeat
+    Infinity.
+  - Typewriter cursor: Motion animate opacity 1→0→1, duration 0.5s, repeat
+    Infinity (blink effect).
+
+COLOUR SCHEME:
+  Page background    :  #0A0A0A
+  First name         :  #F0F0F0
+  Last name          :  #E8FF00
+  Role typewriter    :  #F0F0F0, cursor in #E8FF00
+  Bio text           :  #A0A0A0
+  Primary CTA bg     :  #E8FF00
+  Primary CTA text   :  #0A0A0A
+  Secondary CTA bg   :  transparent
+  Secondary CTA bdr  :  #333333
+  Secondary CTA text :  #F0F0F0
+  Social icons       :  #555555 → #F0F0F0 on hover
+
+------------------------------------------------------------------------
+3. About
+------------------------------------------------------------------------
+
+LAYOUT:
+  2-column grid (lg:grid-cols-2), gap-6. Both columns are Box components.
+  Section label '01 / ABOUT' top-left of section.
+
+  Left box (text):
+    - Heading 'ABOUT ME' in Space Grotesk text-4xl #F0F0F0.
+    - 3–4 paragraphs of bio text, Inter text-base #A0A0A0.
+    - Stat row at bottom — 3 metrics side by side:
+        Number: Space Grotesk text-3xl #E8FF00
+        Label:  Montserrat text-xs #555555 uppercase tracking-widest
+        e.g. "3+ Years  /  20+ Projects  /  5 Countries"
+
+  Right box (stacked, two inner boxes):
+    Top inner box:
+      - Abstract ASCII / text-art block. A large decorative text composition
+        built from monospace characters — think a grid of symbols, brackets,
+        pipes, and dots arranged to suggest a "profile" or identity without
+        using any image. Font: JetBrains Mono, text-xs, line-height tight,
+        text-[#333333]. On hover the character colours shift to #E8FF00 via
+        CSS transition 300ms. Full-width, fills the box.
+      - Example pattern (customise freely):
+            ┌──────────────────────────┐
+            │  ░░░░░░░░░░░░░░░░░░░░░░  │
+            │  ░░  [ NAME ]  ░░░░░░░░  │
+            │  ░░  ENGINEER  ░░░░░░░░  │
+            │  ░░░░░░░░░░░░░░░░░░░░░░  │
+            └──────────────────────────┘
+    Bottom inner box:
+      - Three info rows with icon + label + value:
+            Currently learning / Currently reading / Currently listening to
+      - Icon: react-icons 16px #555555. Label: text-xs #555555. Value: text-sm #F0F0F0.
+
+ANIMATION (Motion):
+  - Left box:  whileInView, x:-40 opacity:0 → x:0 opacity:1. Duration 0.6s.
+  - Right box: whileInView, x:40 opacity:0 → x:0 opacity:1. Duration 0.6s,
+    delay 0.15s. viewport: { once: true, amount: 0.2 }.
+  - Stat numbers: count-up from 0 to value on enter (custom useCountUp hook,
+    duration 1.5s, ease 'easeOut').
+  - ASCII block: on section enter, characters reveal row by row from top to
+    bottom (each row fades in with opacity:0→1, stagger 0.04s per row).
+  - ASCII block hover: text-[#333333] → text-[#E8FF00], CSS transition 300ms.
+
+COLOUR SCHEME:
+  Box background    :  #111111
+  Box border        :  #222222 → #E8FF00 on hover
+  Heading           :  #F0F0F0
+  Body text         :  #A0A0A0
+  Stat numbers      :  #E8FF00
+  Stat labels       :  #555555
+  Inner box bg      :  #0A0A0A
+  Inner box border  :  #222222
+  ASCII text        :  #333333 → #E8FF00 on hover
+
+------------------------------------------------------------------------
+4. Skills
+------------------------------------------------------------------------
+
+LAYOUT:
+  Full-width section. Section label '02 / SKILLS'.
+  Heading 'WHAT I WORK WITH' in Space Grotesk text-4xl.
+
+  Tab bar: horizontal row — Languages / Frameworks / Tools / Databases / Other.
+    Active tab:   bg-[#E8FF00] text-[#0A0A0A], text-xs font-bold JetBrains Mono
+    Inactive tab: bg-[#111111] border-[#333333] text-[#555555]
+
+  Tab content (SkillGrid.tsx island, client:visible):
+    Grid of skill boxes — 4 cols desktop, 3 cols tablet, 2 cols mobile.
+    Each skill box (h-24 fixed):
+      - react-icon centred, 24px, default #A0A0A0
+      - Skill name in Montserrat text-xs #A0A0A0 below icon
+      - Radix Tooltip on hover: experience string e.g. "3 years"
+    On hover: border → #E8FF00, icon → #E8FF00
+
+ANIMATION (Motion):
+  - Tab switch: outgoing grid exits opacity:0, y:10, scale:0.98 in 0.15s.
+    Incoming grid: staggered children, each from opacity:0 y:20, stagger 0.03s.
+  - Section enter (whileInView): tab bar slides from y:-20 opacity:0.
+  - Skill box: whileHover scale:1.04, whileTap scale:0.97.
+
+COLOUR SCHEME:
+  Section bg         :  #0A0A0A
+  Active tab bg      :  #E8FF00
+  Active tab text    :  #0A0A0A
+  Inactive tab bg    :  #111111
+  Inactive tab bdr   :  #333333
+  Inactive tab text  :  #555555
+  Skill box bg       :  #111111
+  Skill box border   :  #222222 → #E8FF00 on hover
+  Icon default       :  #A0A0A0
+  Icon hover         :  #E8FF00
+
+------------------------------------------------------------------------
+5. Education
+------------------------------------------------------------------------
+
+LAYOUT:
+  Section label '03 / EDUCATION'. Heading 'WHERE I STUDIED'.
+
+  Custom vertical timeline — Timeline.tsx island with prop type="education".
+  Vertical line: 2px solid #222222, running down the left side of the section.
+  Timeline node: 12px SQUARE (not circle — matches box aesthetic), filled
+  #E8FF00, positioned on the line at the vertical midpoint of each entry's
+  top edge.
+
+  Each entry box (to the right of the line):
+    - Year range:   JetBrains Mono text-xs #E8FF00 (top left)
+    - Degree title: Space Grotesk text-2xl #F0F0F0
+    - Institution:  Montserrat text-sm #A0A0A0
+    - GPA / notes:  Montserrat text-sm #555555
+    - Tech tags row at bottom (Tag component):
+        bg-[#111111] border-[#333333] text-[#A0A0A0] text-xs JetBrains Mono
+
+ANIMATION (Motion):
+  - Timeline line: scaleY animates 0→1 on section enter (transform-origin top),
+    duration 1.0s, ease 'easeInOut'. Driven by useInView.
+  - Each entry box: whileInView, x:40 opacity:0 → x:0 opacity:1. Duration 0.5s,
+    stagger 0.2s between entries.
+  - Timeline node: scale 0→1 as its entry enters. Duration 0.3s, ease 'backOut'.
+
+COLOUR SCHEME:
+  Timeline line    :  #222222
+  Node (square)    :  #E8FF00
+  Entry box bg     :  #111111
+  Entry box border :  #222222
+  Year label       :  #E8FF00
+  Degree title     :  #F0F0F0
+  Institution      :  #A0A0A0
+  GPA / notes      :  #555555
+  Tag bg           :  #111111
+  Tag border       :  #333333
+  Tag text         :  #A0A0A0
+
+------------------------------------------------------------------------
+6. Experience
+------------------------------------------------------------------------
+
+LAYOUT:
+  Section label '04 / EXPERIENCE'. Heading 'WHERE I WORKED'.
+
+  Reuses Timeline.tsx with prop type="experience". Same vertical timeline
+  structure as Education for visual consistency.
+
+  Each entry box (additional fields vs Education):
+    - Role title:   Space Grotesk text-2xl #E8FF00
+    - Company name: Montserrat text-lg #A0A0A0 (below role)
+    - Employment badge (top right of box):
+        Text: FULL TIME / PART TIME / INTERNSHIP / FREELANCE
+        Style: text-xs JetBrains Mono, bg-[#0A0A0A], border border-[#E8FF00],
+        text-[#E8FF00], px-2 py-0.5
+    - Bullet list: 3–5 responsibility/achievement lines, Montserrat text-sm #A0A0A0
+    - Tech stack tags row at bottom (same Tag component as Education)
+
+  Mobile (<768px): timeline switches to HorizontalScroll.tsx. Each entry
+  becomes a card that the user drags/swipes through horizontally. A dot row
+  at the bottom tracks position.
+
+ANIMATION (Motion):
+  - Same timeline line and entry entrance animations as Education.
+  - Employment badge: on hover, border-opacity pulses 1→0.5→1 once,
+    duration 0.3s.
+  - Mobile drag: Motion drag on x-axis, dragConstraints calculated from
+    total card width vs container width.
+
+COLOUR SCHEME:
+  Same as Education.
+  Role title         :  #E8FF00
+  Company name       :  #A0A0A0
+  Badge bg           :  #0A0A0A
+  Badge border       :  #E8FF00
+  Badge text         :  #E8FF00
+
+------------------------------------------------------------------------
+7. Certifications
+------------------------------------------------------------------------
+
+LAYOUT:
+  Section label '05 / CERTIFICATIONS'. Heading 'WHAT I EARNED'.
+
+  Horizontal carousel (CertCarousel.tsx, client:visible).
+  Shows 3 cards on desktop, 1.2 on mobile (peek effect).
+
+  Each certificate card:
+    - Issuer logo / icon: top left, 32px, react-icons or <img>
+    - Certificate title:  Space Grotesk text-xl #F0F0F0
+    - Issuer name:        Montserrat text-sm #A0A0A0
+    - Date issued:        JetBrains Mono text-xs #555555
+    - Credential ID:      JetBrains Mono text-xs #555555
+    - 'VERIFY →' link:    text-xs #E8FF00 with external-link icon, bottom right
+
+  Navigation: prev/next arrow buttons flanking the carousel.
+    Arrow button: 32×32 box, bg-[#111111], border-[#333333].
+    Arrow icon: react-icons 16px #A0A0A0 → #F0F0F0 on hover.
+
+ANIMATION (Motion):
+  - Carousel drag: Motion drag on x-axis, dragConstraints based on total
+    card width. onDragEnd snaps to nearest card using animate() with spring.
+  - Card hover: y:-4, border → #E8FF00, duration 0.2s.
+  - Section entrance: cards enter from x:60 opacity:0, stagger 0.1s.
+
+COLOUR SCHEME:
+  Carousel bg       :  #0A0A0A
+  Card bg           :  #111111
+  Card border       :  #222222 → #E8FF00 on hover
+  Title             :  #F0F0F0
+  Issuer            :  #A0A0A0
+  Date / ID         :  #555555
+  Verify link       :  #E8FF00
+  Arrow button bg   :  #111111
+  Arrow button bdr  :  #333333
+
+------------------------------------------------------------------------
+8. Work / Projects
+------------------------------------------------------------------------
+
+LAYOUT:
+  Section label '06 / WORK'. Heading 'WHAT I BUILT'.
+
+  Filter bar: row of tag-buttons.
+    Categories: All / Web / Mobile / Open Source / Design / Other
+    Active:   bg-[#E8FF00] text-[#0A0A0A]
+    Inactive: bg-[#111111] border-[#333333] text-[#555555]
+
+  Project grid: 3 cols desktop, 2 cols tablet, 1 col mobile.
+  Standard project card:
+    - Top: screenshot/mockup image, full-width, aspect-video, object-cover
+    - Card body: project name (Space Grotesk text-xl #F0F0F0) + short
+      description (Montserrat text-sm #A0A0A0)
+    - Bottom row: tech tags (left) + GitHub icon + live link icon (right)
+
+  Featured project (first / pinned card):
+    - col-span-3 (full-width). Side-by-side layout: image left 50%, text
+      right 50%.
+    - Thin 3px solid #E8FF00 bar at very top of card (accent indicator).
+
+  GRID / SCROLL toggle button (above the grid):
+    Switches between grid layout and horizontal scroll mode.
+
+  Horizontal scroll mode (HorizontalScroll.tsx):
+    - Parent: overflow:hidden, fixed height (100vh). Screen stays still.
+    - Children: each project panel is viewport-width. User drags to advance.
+    - Fixed progress bar at bottom: Motion scaleX driven by drag position,
+      transform-origin left, bg-[#E8FF00], h-[3px].
+
+ANIMATION (Motion):
+  - Grid entrance: each card whileInView, y:40 opacity:0 → y:0 opacity:1,
+    stagger 0.08s.
+  - Filter change: all cards exit opacity:0 scale:0.96 together (0.15s),
+    then filtered set enters with stagger.
+  - Featured accent bar: width 0%→100% on card hover, duration 0.3s,
+    ease 'easeOut'.
+  - Horizontal scroll: Motion useScroll + useTransform for parallax on
+    each project image (image moves at 0.7× scroll speed).
+  - Progress bar: Motion animate scaleX 0→1 as drag advances.
+
+COLOUR SCHEME:
+  Section bg          :  #0A0A0A
+  Card bg             :  #111111
+  Card border         :  #222222 → #333333 on hover
+  Featured accent bar :  #E8FF00 (3px top border)
+  Filter active       :  #E8FF00 bg, #0A0A0A text
+  Filter inactive     :  #111111 bg, #333333 border, #555555 text
+  Progress bar        :  #E8FF00
+  Icon buttons        :  #555555 → #F0F0F0 on hover
+
+------------------------------------------------------------------------
+9. Achievements
+------------------------------------------------------------------------
+
+LAYOUT:
+  Section label '07 / ACHIEVEMENTS'. Heading 'MILESTONES'.
+
+  Bento-grid layout using CSS grid (no library).
+  6 boxes in a 3-col × 2-row grid. Sizes:
+    Box 1 (col-span-2, row-span-1): largest achievement — title,
+      description, date, optional badge or image
+    Box 2 (col-span-1, row-span-1): metric box — large number + label
+      e.g. '1st' with label 'Place · Hackathon 2023'
+    Boxes 3–6 (col-span-1 each): standard achievement entries
+
+  Each box:
+    - Category icon: top right, 16px, #555555
+    - Title:         Space Grotesk text-xl #F0F0F0
+    - Description:   Montserrat text-sm #A0A0A0
+    - Date:          JetBrains Mono text-xs #555555
+
+  Metric box: large number in Space Grotesk text-5xl #E8FF00, label
+  in text-xs #555555 below.
+
+ANIMATION (Motion):
+  - Bento grid entrance: each box whileInView, y:30 opacity:0 → y:0 opacity:1,
+    stagger 0.07s.
+  - Metric number: count-up from 0 on enter (same useCountUp hook as About).
+  - Box hover: border → #E8FF00, y:-2, duration 0.2s.
+
+COLOUR SCHEME:
+  Section bg    :  #0A0A0A
+  Box bg        :  #111111
+  Box border    :  #222222 → #E8FF00 on hover
+  Metric number :  #E8FF00
+  Icon          :  #555555
+  Title         :  #F0F0F0
+  Description   :  #A0A0A0
+  Date          :  #555555
+
+------------------------------------------------------------------------
+10. Testimonials
+------------------------------------------------------------------------
+
+LAYOUT:
+  Section label '08 / TESTIMONIALS'. Heading 'WHAT PEOPLE SAY'.
+
+  Stacked card carousel (TestimonialStack.tsx, client:visible).
+  At rest, 3 cards visible in a stack:
+    - Front card: fully visible, z-index 3
+    - 2nd card: y:16, scale:0.95, opacity:0.6, z-index 2
+    - 3rd card: y:32, scale:0.90, opacity:0.3, z-index 1
+
+  Front card content:
+    - Opening quote mark: Space Grotesk text-6xl #E8FF00, absolute, top-left
+    - Quote text: Montserrat text-lg #F0F0F0, italic, max-w-2xl
+    - Author name: Space Grotesk text-xl #F0F0F0
+    - Role + company: Montserrat text-sm #A0A0A0
+    - Author avatar: 48px square, object-cover, border border-[#333333]
+
+  Navigation:
+    - 'PREV' / 'NEXT' text buttons — JetBrains Mono text-xs #A0A0A0
+    - Dot indicators: row of 4px squares. Active: #E8FF00. Inactive: #333333.
+
+ANIMATION (Motion):
+  - Advance: front card exits to x:-200, opacity:0, rotate:-5deg (0.35s).
+    Next card animates from stacked position (y:16, scale:0.95) to front
+    (y:0, scale:1.0) with spring physics.
+    Remaining cards cascade their position with duration 0.4s.
+  - Auto-advance: every 5000ms. Paused on hover (useMotionValue hover
+    detection — not CSS :hover).
+  - Drag: front card is draggable on x-axis. onDragEnd with velocity
+    threshold ±200 triggers advance or go-back.
+
+COLOUR SCHEME:
+  Section bg          :  #0A0A0A
+  Front card bg       :  #111111
+  Front card border   :  #333333
+  Back cards bg       :  #0F0F0F
+  Quote mark          :  #E8FF00
+  Quote text          :  #F0F0F0
+  Author name         :  #F0F0F0
+  Author role         :  #A0A0A0
+  Active dot          :  #E8FF00
+  Inactive dot        :  #333333
+
+------------------------------------------------------------------------
+11. Articles
+------------------------------------------------------------------------
+
+LAYOUT:
+  Section label '09 / ARTICLES'. Heading 'WHAT I WROTE'.
+
+  Editorial listing style — NOT a card grid. Each article is a full-width
+  row with only a border-bottom (newspaper/index style).
+
+  Each row (flex, items-centre):
+    - Left:   Article number (01, 02…) JetBrains Mono text-sm #555555, min-w-[48px]
+    - Centre: Article title, Space Grotesk text-xl #F0F0F0, flex-1
+    - Right:  Publication + date, Montserrat text-sm #555555, then ↗ icon #555555
+
+  Row border: border-bottom #222222.
+  On hover:
+    - Row bg → #111111
+    - Title colour → #E8FF00
+    - Border-bottom → #E8FF00
+    - External link icon: x:0 → x:4 (Motion whileHover)
+  All colour transitions: CSS transition 150ms.
+
+ANIMATION (Motion):
+  - Each row whileInView: x:-20 opacity:0 → x:0 opacity:1, stagger 0.06s,
+    duration 0.4s. viewport once: true.
+  - Row hover: Motion whileHover wraps the row for the icon x-shift.
+    Colour changes are CSS (faster and cheaper for hover states).
+
+COLOUR SCHEME:
+  Row bg default   :  transparent
+  Row bg hover     :  #111111
+  Row border       :  #222222 → #E8FF00 on hover
+  Number           :  #555555
+  Title default    :  #F0F0F0
+  Title hover      :  #E8FF00
+  Date / pub       :  #555555
+  Link icon hover  :  #F0F0F0
+
+------------------------------------------------------------------------
+12. GitHub
+------------------------------------------------------------------------
+
+LAYOUT:
+  Section label '10 / GITHUB'. Heading 'MY CONTRIBUTIONS'.
+
+  2-box layout (lg:grid-cols-3), gap-6:
+    Left box (col-span-2): react-github-calendar component, full-width.
+      Calendar colour overrides:
+        Empty cell (level 0):   #1A1A1A
+        Level 1:                #333333
+        Level 2:                #666600
+        Level 3:                #AACC00
+        Level 4 (max):          #E8FF00
+    Right box (col-span-1): GitHub stats — 3 metric rows:
+        - Total stars
+        - Total public repos
+        - Top language
+      Each row: icon (react-icons 16px #555555) + label (Montserrat text-sm #A0A0A0)
+      + value (JetBrains Mono text-sm #F0F0F0)
+
+ANIMATION (Motion):
+  - Left box:  whileInView y:30 opacity:0 → y:0 opacity:1, duration 0.5s.
+  - Right box: same, delay 0.2s.
+  - Calendar cells: no individual animation (performance). Calendar fades in
+    as one unit with the left box.
+
+COLOUR SCHEME:
+  Section bg            :  #0A0A0A
+  Box bg                :  #111111
+  Box border            :  #222222
+  Calendar empty cell   :  #1A1A1A
+  Calendar level 1-4    :  #333333 → #E8FF00 (4-step scale)
+  Stats icon            :  #555555
+  Stats label           :  #A0A0A0
+  Stats value           :  #F0F0F0
+
+------------------------------------------------------------------------
+13. Languages & Interests
+------------------------------------------------------------------------
+
+LAYOUT:
+  Section label '11 / MORE'. Heading 'BEYOND CODE'.
+
+  3-column grid (lg:grid-cols-3), gap-6. Each column is a Box.
+
+  Column 1 — Languages:
+    Each language as a row:
+      - Name:  Montserrat text-sm #F0F0F0
+      - Level: Montserrat text-xs #555555 (e.g. Native / Fluent / Intermediate)
+      - Bar:   4px height. Track: #222222. Fill: #E8FF00.
+                Width is driven by proficiency percentage (e.g. 90%).
+
+  Column 2 — Interests:
+    2×3 icon grid of interest boxes (each ~80px square):
+      - react-icon 24px centred, #A0A0A0 → #E8FF00 on hover
+      - Label: text-xs #555555 below icon
+
+  Column 3 — Currently:
+    Simple list with 3 rows:
+      - Category label: JetBrains Mono text-xs #E8FF00 uppercase
+        e.g. READING / WATCHING / PLAYING
+      - Item text: Montserrat text-sm #A0A0A0
+
+ANIMATION (Motion):
+  - Column boxes: whileInView y:30 opacity:0, stagger 0.15s, duration 0.5s.
+  - Language bars: whileInView, width animates 0→percentage. Duration 0.8s,
+    stagger 0.1s per bar, ease 'easeOut'. Uses Motion animate on a style prop.
+  - Interest icon boxes: whileInView scale:0→1, stagger 0.05s.
+  - Interest box hover: icon colour #A0A0A0 → #E8FF00 (CSS transition 150ms).
+
+COLOUR SCHEME:
+  Column box bg    :  #111111
+  Column box bdr   :  #222222
+  Bar track        :  #222222
+  Bar fill         :  #E8FF00
+  Language name    :  #F0F0F0
+  Level label      :  #555555
+  Interest icon    :  #A0A0A0 → #E8FF00 on hover
+  Currently label  :  #E8FF00
+  Currently item   :  #A0A0A0
+
+------------------------------------------------------------------------
+14. Contact
+------------------------------------------------------------------------
+
+LAYOUT:
+  Section label '12 / CONTACT'. Heading 'LET'S TALK'.
+
+  2-column grid (lg:grid-cols-2), gap-8.
+
+  Left column (info):
+    - Heading in Space Grotesk text-6xl #F0F0F0, line-height-tight.
+    - Tagline in Montserrat text-base #A0A0A0, max-w-sm.
+    - Email address: JetBrains Mono text-sm #E8FF00. Click → copies to
+      clipboard (Clipboard API). Shows "Copied!" tooltip for 2s on click.
+    - Social link rows (icon + platform + handle):
+        Icon: 16px #555555. Platform: text-xs #555555. Handle: text-sm #F0F0F0.
+        Row hover: handle → #E8FF00, CSS transition 150ms.
+
+  Right column (ContactForm.tsx island, client:load):
+    3 inputs in a Box:
+      - Name field (type text)
+      - Email field (type email)
+      - Message field (textarea, rows 5)
+
+    Input styling:
+      bg-[#0A0A0A] border border-[#333333] text-[#F0F0F0]
+      placeholder:text-[#555555] w-full p-3 text-sm
+      focus: border-[#E8FF00] outline-none (no border radius — border-none
+      on focus would break design, just change colour)
+
+    Submit button:
+      'SEND MESSAGE' — full-width, bg-[#E8FF00], text-[#0A0A0A], text-sm
+      font-bold py-3. whileHover y:-1, whileTap y:1 scale:0.98.
+
+    Loading state: button text replaced by 3 animated dots (staggered
+    scale 0.5→1→0.5, infinite loop, 0.15s stagger).
+
+    Success state: form replaced by confirmation Box with border #39FF14.
+      Message: "Message sent. I'll get back to you soon." in #F0F0F0.
+
+    Error state: form stays, border of form Box turns #FF3B30, error
+      message in Montserrat text-sm #FF3B30 below the submit button.
+
+  Client-side validation (before send):
+    - All fields required
+    - Email must match /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    - Message minimum 20 characters
+    - Honeypot hidden field: if populated, silently skip send
+
+ANIMATION (Motion):
+  - Left column:  whileInView x:-40 opacity:0 → x:0 opacity:1, duration 0.6s.
+  - Form box:     whileInView x:40 opacity:0 → x:0 opacity:1, duration 0.6s,
+    delay 0.15s.
+  - Input focus:  Motion animate border-color #333333 → #E8FF00 (not CSS,
+    keeps it consistent across browsers).
+  - State change: form exits opacity:0 y:-10, confirmation enters y:10→0
+    opacity:0→1. Duration 0.35s each.
+
+COLOUR SCHEME:
+  Section bg        :  #0A0A0A
+  Form box bg       :  #111111
+  Input bg          :  #0A0A0A
+  Input border      :  #333333 → #E8FF00 on focus
+  Input text        :  #F0F0F0
+  Placeholder       :  #555555
+  Submit button bg  :  #E8FF00
+  Submit button txt :  #0A0A0A
+  Success border    :  #39FF14
+  Error text        :  #FF3B30
+
+------------------------------------------------------------------------
+15. Footer
+------------------------------------------------------------------------
+
+LAYOUT:
+  Full-width. bg-[#0A0A0A]. border-top border-[#222222]. py-8.
+  3-column layout:
+    Left:   Name + tagline, Montserrat text-xs #555555
+    Centre: Nav links repeated (same 5 links as navbar)
+    Right:  'Built with Astro · Motion · Tailwind' — text-xs #555555
+
+  Bottom strip (border-top #222222, pt-4 mt-4):
+    Left:  Copyright © [year] [Name]. Montserrat text-xs #555555.
+    Right: 'BACK TO TOP ↑' — JetBrains Mono text-xs #A0A0A0 → #E8FF00 on hover.
+           On click: Motion scroll to #hero section (smooth).
+
+ANIMATION (Motion):
+  - Footer: whileInView y:20 opacity:0 → y:0 opacity:1, duration 0.5s.
+  - 'BACK TO TOP': whileHover y:-2.
+
+COLOUR SCHEME:
+  Footer bg          :  #0A0A0A
+  Top border         :  #222222
+  Name / tagline     :  #555555
+  Nav links          :  #555555 → #F0F0F0 on hover
+  Built-with text    :  #555555
+  Copyright          :  #555555
+  Back to top        :  #A0A0A0 → #E8FF00 on hover
+
+################################################################################
+## Global Animation Patterns
+################################################################################
+
+------------------------------------------------------------------------
+Scroll-Based Entrance (default for all sections)
+------------------------------------------------------------------------
+
+  initial    : { opacity: 0, y: 40 }
+  animate    : { opacity: 1, y: 0 }
+  transition : { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }
+  viewport   : { once: true, amount: 0.15 }
+
+------------------------------------------------------------------------
+Stagger Container Pattern
+------------------------------------------------------------------------
+
+  // Parent container
+  variants: {
+    hidden : { opacity: 0 },
+    show   : { opacity: 1, transition: { staggerChildren: 0.07 } }
+  }
+
+  // Child item
+  variants: {
+    hidden : { opacity: 0, y: 30 },
+    show   : { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  }
+
+------------------------------------------------------------------------
+Box Hover Pattern (used on ALL box components)
+------------------------------------------------------------------------
+
+  // Tailwind (colour transition via CSS — cheaper than Motion for hover)
+  className="border border-[#222222] transition-colors duration-200
+             hover:border-[#E8FF00]"
+
+  // Motion (y-lift for elevated card contexts)
+  whileHover={{ y: -3 }}
+  transition={{ duration: 0.2, ease: 'easeOut' }}
+
+------------------------------------------------------------------------
+Page Load Sequence (Hero)
+------------------------------------------------------------------------
+
+  0.00s  Navbar slides down
+  0.10s  Hero section label fades in
+  0.20s  Hero name — first line enters
+  0.30s  Hero name — second line enters
+  0.40s  Role typewriter begins + Spline scene fades in
+  0.60s  Bio text enters
+  0.75s  CTA buttons enter
+  0.85s  Social icons enter
+  1.00s  Scroll indicator bounce loop begins
+
+------------------------------------------------------------------------
+Typewriter Effect — TypewriterHeadline.tsx (custom, no library)
+------------------------------------------------------------------------
+
+  Logic:
+    - setInterval appends one character at a time (typingSpeed: 60ms/char)
+    - Pause at end of string: 2000ms
+    - Delete characters in reverse (deleteSpeed: 30ms/char)
+    - Advance to next string in array, repeat
+
+  Cursor:
+    - A '|' character rendered next to the text
+    - Motion animate: opacity 1→0→1, duration 0.5s, repeat Infinity
+    - Colour: #E8FF00
+
+  Config shape:
+    strings      : string[]
+    typingSpeed  : number  (ms per character, default 60)
+    deleteSpeed  : number  (ms per character, default 30)
+    pauseAt      : number  (ms at end of string, default 2000)
+
+------------------------------------------------------------------------
+Horizontal Scroll — HorizontalScroll.tsx
+------------------------------------------------------------------------
+
+  - Motion drag on x-axis inside overflow:hidden container
+  - dragConstraints: { left: -(totalWidth - containerWidth), right: 0 }
+  - onDragEnd: calculate nearest snap point, call animate(x, snapTarget,
+    { type: 'spring', stiffness: 300, damping: 30 })
+  - Progress indicator: useMotionValue(x) → useTransform(x,
+    [0, -(totalWidth - containerWidth)], [0, 1]) → scaleX on progress bar
+  - Touch: Motion handles touch events natively — no additional config needed
+
+################################################################################
+## Email Setup (EmailJS)
+################################################################################
+
+------------------------------------------------------------------------
+Environment Variables (.env)
+------------------------------------------------------------------------
+
+  PUBLIC_EMAILJS_SERVICE_ID=service_xxxxxxx
+  PUBLIC_EMAILJS_TEMPLATE_ID=template_xxxxxxx
+  PUBLIC_EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxxx
+
+  Note: Astro requires the PUBLIC_ prefix for client-accessible env vars.
+  Server-side env vars (without PUBLIC_) are not available in islands.
+
+------------------------------------------------------------------------
+EmailJS Template Fields
+------------------------------------------------------------------------
+
+  Match these exactly in the ContactForm.tsx send call:
+    {{from_name}}   — sender's name
+    {{from_email}}  — sender's email address
+    {{message}}     — message body
+    {{to_name}}     — your name (can be hardcoded as a static field in the
+                      EmailJS template editor or passed from the form)
+
+------------------------------------------------------------------------
+Send Function (ContactForm.tsx)
+------------------------------------------------------------------------
+
+  import emailjs from '@emailjs/browser';
+
+  emailjs.send(
+    import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+    import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+    { from_name, from_email, message },
+    import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
+  )
+  .then(() => setStatus('success'))
+  .catch(() => setStatus('error'));
+
+------------------------------------------------------------------------
+Production Notes
+------------------------------------------------------------------------
+
+  - EmailJS free tier: 200 emails/month — sufficient for a portfolio.
+  - Whitelist your production domain in the EmailJS dashboard under
+    "Allowed Origins" — otherwise sends will fail in production.
+  - Honeypot field: hidden input (display:none, aria-hidden:true). If
+    value is non-empty on submit, skip send silently.
+  - Disable submit button for 3s after a successful send to prevent
+    accidental double-submission.
+
+################################################################################
+## Performance Notes
+################################################################################
+
+  - Spline scene: client:load but inside Suspense — renders as soon as JS
+    hydrates but does not block LCP of text content.
+  - react-github-calendar: client:visible — only loads and hydrates when
+    the section scrolls into the viewport.
+  - All Motion animations use transform and opacity only — GPU-composited
+    properties, no layout recalculation triggered.
+  - Fonts: self-hosted in public/fonts/, declared with @font-face in
+    globals.css, preloaded in BaseLayout.astro with <link rel="preload"
+    as="font" crossorigin>.
+  - Images: Astro <Image> component used throughout for automatic WebP
+    conversion, correct sizing, and native lazy loading.
+  - No per-component CSS files — all Tailwind utilities, zero unused CSS
+    in production build.
+  - Motion tree-shaking: import only what is used, e.g.:
+      import { motion, useScroll, useTransform, animate } from 'motion/react'
+
+################################################################################
+## Order of Work
+################################################################################
+
+1.  Scaffold Astro project. Install Tailwind CSS v4, Motion, TypeScript.
+    Configure astro.config.mjs with React integration for islands.
+
+2.  Set up globals.css (all CSS variables), BaseLayout.astro (head, meta,
+    font preloads), and tailwind.config.mjs (design tokens mapped to
+    CSS variables).
+
+3.  Build shared components: Box.astro, SectionLabel.astro, Tag.astro.
+
+4.  Build NavBar.astro and Footer.astro with all animations wired up.
+
+5.  Build Hero.astro + TypewriterHeadline.tsx + SplineHero.tsx. Wire up
+    the full page-load animation sequence (timing table above).
+
+6.  Build About.astro with useCountUp hook and profile image box.
+
+7.  Build Skills.astro + SkillGrid.tsx with tab interface and switching
+    animations.
+
+8.  Build Timeline.tsx (shared component). Build Education.astro and
+    Experience.astro, both using Timeline.tsx with different data props.
+
+9.  Build HorizontalScroll.tsx. Build Certifications.astro + CertCarousel.tsx
+    using HorizontalScroll internally.
+
+10. Build Work.astro + ProjectCarousel.tsx with filter bar, grid mode,
+    and horizontal scroll mode toggle.
+
+11. Build Achievements.astro with bento-grid CSS layout and count-up.
+
+12. Build Testimonials.astro + TestimonialStack.tsx with stacked card,
+    drag support, and auto-advance.
+
+13. Build Articles.astro with editorial row list layout.
+
+14. Build Github.astro + GithubCalendar.tsx with custom colour overrides.
+
+15. Build LanguagesInterests.astro with animated proficiency bars.
+
+16. Build Contact.astro + ContactForm.tsx. Configure EmailJS with .env.
+    Test form submission end-to-end (including error and success states).
+
+17. Assemble all sections in index.astro. Wire up section IDs for navbar
+    anchor links. Test smooth scroll.
+
+18. Performance pass: audit LCP, confirm Spline lazy loads correctly,
+    verify no cumulative layout shift, check bundle size.
+
+19. Responsive pass: test all breakpoints — 320px, 768px, 1024px, 1440px.
+    Confirm Experience timeline switches to HorizontalScroll on mobile.
+
+20. Deploy to Vercel or Netlify. Add custom domain. Whitelist production
+    origin in EmailJS dashboard. Smoke-test contact form in production.
+
+##### This order must not be altered by any means #####
+
+################################################################################
+## Work Done
+################################################################################
+List everything done here. After each task completion update this list.
+
+1. This is the Instructions .txt file for the project. The full tech stack has
+   been defined. All 15 component sections have been specified with layout,
+   animation pattern, and colour scheme. The design system (colour palette,
+   typography, box system, spacing rules) has been documented. The global
+   animation patterns and reusable Motion configurations have been written out.
+   The EmailJS integration has been fully mapped. The folder structure has been
+   laid out. The Order of Work (20 steps) has been set. The document has been
+   produced in the agreed .txt format.
+
+2. 1st step has been done, yet check it again that are the mentioned things 
+   done or not in that step and only then move to the next step.
+
+3. Step 1 verified — Astro project scaffolded, Tailwind CSS v4, Motion,
+   TypeScript (strict, react-jsx), React integration in astro.config.mjs all
+   confirmed present and working. All npm dependencies installed.
+
+   Step 2 completed:
+   - Created src/styles/globals.css with:
+     • Tailwind CSS v4 @import and @theme directive with all design tokens
+       (bg-base, bg-surface, bg-elevated, bg-box, text-primary, text-secondary,
+       text-muted, accent, accent-dark, border-default, border-strong,
+       border-accent, semantic colours, font families)
+     • @fontsource imports for Space Grotesk 700, Inter 400/500, JetBrains
+       Mono 400/500
+     • :root CSS custom properties mirroring all tokens for non-Tailwind use
+     • Full base reset (box-sizing, margin, padding, font smoothing)
+     • Typography base styles (headings → Space Grotesk, body → Inter)
+     • Utility resets (images, inputs, buttons, lists)
+     • Custom scrollbar styling (WebKit + Firefox)
+     • ::selection with accent colour
+   - Created src/layouts/BaseLayout.astro with:
+     • Frontmatter globals.css import (resolves @fontsource paths correctly)
+     • Full <head>: charset, viewport, generator, SEO title/description,
+       canonical URL, favicons, Open Graph, Twitter Card, theme-color
+     • Props interface for title and description overrides
+     • <slot /> for page content
+   - Tailwind v4 @theme in globals.css replaces the need for a separate
+     tailwind.config.mjs (v4 uses CSS-native configuration)
+   - Updated src/pages/index.astro to use BaseLayout with a temporary
+     placeholder verifying design tokens (font-display, text-text-primary,
+     text-text-muted, bg-accent all render correctly)
+   - Verified: dev server runs clean with zero 404 errors, all three fonts
+     load correctly, design tokens apply as expected.
+
+4. Step 3 completed — built all three shared components:
+   - Created src/components/shared/SectionLabel.astro:
+     • Renders "01 / ABOUT" pattern — accent number, muted separator + text
+     • JetBrains Mono, text-xs, uppercase, tracking-widest
+     • Props: number (string), text (string), optional class
+   - Created src/components/shared/Box.astro:
+     • Base building block — bg-surface, border-strong, rounded-none
+     • Hover: border transitions to border-accent over 200ms (CSS transition)
+     • Props: padding ("default" p-6 / "lg" p-8), hover (boolean, default true),
+       as (HTML tag, default div), class, pass-through attributes
+   - Created src/components/shared/Tag.astro:
+     • Flat rectangular chip — font-mono, text-xs, px-2.5 py-1, border, no radius
+     • Two variants: "default" (muted bg/border/text) and "accent" (accent
+       border + text on base bg)
+     • Props: variant ("default" / "accent"), optional class
+   - Verified: all three components render correctly in the browser with
+     correct colours, fonts, spacing, and hover transitions.
+
+5. Step 4 completed — built NavBar and Footer with all animations:
+   - Created src/components/layout/NavBar.tsx (React island, client:load):
+     • Fixed top bar, h-14, bg-[#0A0A0A], max-w-[1200px] centred content
+     • "AT." logo (JetBrains Mono, text-sm, #F0F0F0) — left side
+     • 5 nav links (Montserrat, text-sm, uppercase, tracking-widest) — right side
+     • "HIRE ME" CTA button (bg-[#E8FF00], text-[#0A0A0A], text-xs, font-bold)
+     • Motion mount animation: y:-56 → y:0, opacity 0→1, 0.4s easeOut
+     • Staggered link fade-in: 0.05s stagger, y:-8 → y:0
+     • layoutId "nav-underline" — active indicator slides between links
+     • Scroll detection (100px threshold): border-bottom transparent → #222222
+     • IntersectionObserver auto-tracks active section on scroll
+     • HIRE ME: whileHover scale:1.03, whileTap scale:0.97
+     • Mobile (<768px): MENU/CLOSE label triggers bottom drawer slide-up
+       (AnimatePresence, y:100% → y:0) with backdrop overlay
+   - Created src/components/layout/Footer.tsx (React island, client:visible):
+     • 3-column grid: name+tagline | nav links | "Built with Astro · Motion ·
+       Tailwind" — all text-xs #555555
+     • Bottom strip (border-top #222222): copyright © 2026 | BACK TO TOP ↑
+     • BACK TO TOP: JetBrains Mono, #A0A0A0 → #E8FF00 hover, whileHover y:-2,
+       smooth scrolls to top on click
+     • whileInView entrance: y:20 opacity:0 → y:0 opacity:1, 0.5s
+   - Updated index.astro with placeholder sections matching nav link targets
+     (hero, about, skills, work, experience, contact) for testing
+   - Verified: navbar animations, scroll border, active link tracking, smooth
+     scroll, mobile drawer, footer layout, and BACK TO TOP all work correctly.
+
+6. Step 5 completed — built Hero section with full page-load animation:
+   - Created src/components/ui/TypewriterHeadline.tsx:
+     • Custom typewriter effect — no library. Types forward (60ms/char),
+       pauses (2000ms), deletes backward (30ms/char), cycles strings
+     • Blinking cursor "|" in #E8FF00 via Motion animate opacity
+     • Configurable: strings[], typingSpeed, deleteSpeed, pauseAt
+   - Created src/components/ui/SplineHero.tsx:
+     • Lazy-loaded Spline 3D scene via React.lazy + Suspense
+     • Animated loading dots placeholder while scene loads
+     • Mount animation: opacity 0→1, scale 0.95→1, 0.8s, delay 0.4s
+     • Accepts custom sceneUrl prop
+   - Created src/components/sections/HeroSection.tsx:
+     • Full viewport height (h-screen), 55/45 split (md:grid-cols-[55%_45%])
+     • Page-load sequence with staggered delays matching timing table:
+       0.1s section label → 0.2s name line 1 → 0.3s name line 2 →
+       0.4s typewriter → 0.6s bio → 0.75s CTAs → 0.85s social → 1.0s scroll
+     • Each element: y:40 opacity:0 → y:0 opacity:1, 0.6s, cubic-bezier
+     • "VIEW WORK" / "DOWNLOAD CV" buttons with whileHover y:-2, whileTap y:1
+     • Social icons (GitHub, LinkedIn, Twitter) — #555555 → #F0F0F0 on hover
+     • Spline hidden on mobile (<md), left column goes full-width
+     • Bouncing scroll indicator at bottom: y 0→10→0, 1.2s, repeat Infinity
+   - Verified: all animations play correctly, typewriter cycles roles,
+     Spline scene loads, layout is correct at desktop width.
+
+7. Step 6 completed — built About section with useCountUp hook and ASCII art:
+   - Created src/components/sections/AboutSection.tsx (React island, client:visible):
+     • 2-column grid (lg:grid-cols-2), gap-6, responsive (stacks on mobile)
+     • Left box: "ABOUT ME" heading (Space Grotesk 700), 3 bio paragraphs
+       (Montserrat text-base #A0A0A0), stats row with divider
+     • Stats row: 3 metrics (3+ Years / 20+ Projects / 5 Countries)
+       with useCountUp hook — Motion animate from 0 to target, 1.5s easeOut
+     • Right box: two inner boxes stacked — ASCII art + "currently" info
+     • ASCII art block: JetBrains Mono, text-xs, #333333 → #E8FF00 on hover
+       (CSS transition 300ms). Row-by-row reveal animation (stagger 0.04s)
+     • Currently info: 3 rows (learning / reading / listening to)
+       with icons (FiCode, FiBookOpen, FiHeadphones), staggered entrance
+     • Left box entrance: whileInView x:-40 opacity:0 → x:0 opacity:1, 0.6s
+     • Right box entrance: x:40 opacity:0 → x:0 opacity:1, 0.6s, delay 0.15s
+     • Box hover: border transitions #222222 → #E8FF00 (200ms)
+   - Updated index.astro: replaced About placeholder with <AboutSection
+     client:load /> (fixed from client:visible — needed immediate hydration
+     for Motion useInView to work)
+   - Fixed useCountUp hook: moved useMotionValue to top level (was inside
+     useEffect, violating Rules of Hooks)
+   - Updated ASCII art to category-wise skill map (Languages, Frameworks,
+     Tools, Platforms) with per-category hover zones
+   - Body text font corrected from Montserrat to Inter per spec
+   - Verified: dev server runs clean, section renders and animates correctly.
+
+8. Step 7 completed — built Skills section with icon-focused grid:
+   - Created src/data/skills.ts with skill data (24 skills in 4 categories)
+   - Created src/components/ui/SkillGrid.tsx (React island):
+     • 4 tab categories: Languages / Frameworks / Tools / Platforms
+     • Icon-focused design: large 32px icons centered in square boxes
+     • Skill name hidden by default, slides up on hover in #E8FF00
+     • On hover: icon shifts up, turns #E8FF00, radial glow background,
+       border transitions to #E8FF00, scale 1.06 + y:-4 lift
+     • Tab switching: AnimatePresence mode="wait" with y-slide transition
+     • Responsive grid: 2→3→4→5 columns across breakpoints
+     • Tab bar: JetBrains Mono, active tab bg-[#E8FF00], inactive #111111
+   - Created src/components/sections/SkillsSection.tsx:
+     • Section label "02 / SKILLS", heading "WHAT I WORK WITH"
+     • Scroll-triggered entrance animations via useInView
+   - Skills included: HTML, CSS, JavaScript, TypeScript, Python, React,
+     Next.js, Astro, React Native, Tailwind CSS, Material UI, Node.js,
+     Flask, Git, GitHub, VS Code, Cursor, Antigravity, Expo, LaTeX,
+     Firebase, MongoDB, Netlify, Vercel
+   - Icon imports verified against react-icons exports (SiCss not SiCss3,
+     VscVscode from react-icons/vsc, FiMousePointer for Cursor,
+     FiZap for Antigravity)
+   - Updated index.astro: replaced Skills placeholder with
+     <SkillsSection client:load />
+   - Verified: full production build passes clean (astro build ✓ 4.12s).
+
+9. Step 8 completed — built Timeline shared component and Education/Experience sections:
+   - Created src/data/education.ts and src/data/experience.ts with data.
+   - Created src/components/ui/Timeline.tsx (React island) featuring:
+     • Vertical connecting line with Motion scaleY animation.
+     • Timeline entries with staggered opacity/x animations.
+     • Animated square nodes and dynamic colour switching for different timeline types.
+     • Tech tags and employment badges with hover effects.
+   - Created src/components/sections/EducationSection.tsx to render the timeline with education data.
+   - Created src/components/sections/ExperienceSection.tsx to render the timeline with experience data.
+   - Updated index.astro: Added EducationSection and ExperienceSection, replacing the Experience placeholder.
+
+10. Step 9 completed — built HorizontalScroll and Certifications section:
+   - Created src/data/certifications.ts with mock data.
+   - Created src/components/ui/HorizontalScroll.tsx (React island) supporting drag/swipe on x-axis with spring snapping and an exposed scrollBy API.
+   - Created src/components/ui/CertCarousel.tsx (React island) featuring:
+     • Navigation arrows that control the HorizontalScroll component.
+     • Responsive item widths (peek effect on mobile).
+     • Animated certification cards.
+   - Created src/components/sections/CertificationsSection.tsx to render the carousel.
+   - Updated index.astro: Added CertificationsSection after ExperienceSection.
+
+11. Step 10 completed — built Work section and ProjectCarousel:
+   - Created src/data/projects.ts with mock data for projects.
+   - Created src/components/ui/ProjectCarousel.tsx (React island) featuring:
+     • A category filter bar that smoothly filters projects with AnimatePresence.
+     • A view toggle (Grid / Scroll) that switches layout modes dynamically.
+     • A Grid mode with a featured project card spanning the full width, animated accent bar on hover, and responsive breakpoints.
+     • A Scroll mode utilizing the previously built HorizontalScroll component, displaying full-width project panels with a progress indicator.
+   - Created src/components/sections/WorkSection.tsx to render the carousel.
+   - Updated index.astro: Added WorkSection after CertificationsSection, and removed the old placeholder.
+
+12. Step 11 completed — built Achievements section with bento-grid:
+   - Created src/data/achievements.ts with mock data and defined three item types: large, metric, standard.
+   - Created src/components/sections/AchievementsSection.tsx (React island) featuring:
+     • A responsive bento-grid layout utilizing CSS Grid.
+     • A MetricBox component that leverages framer-motion's animate function to count up to the numeric value upon entering the viewport.
+     • Staggered entrance animations for all bento items.
+   - Updated index.astro: Added AchievementsSection after WorkSection.
+
+13. Step 12 completed — built Testimonials section with stacked card carousel:
+   - Created src/data/testimonials.ts with placeholder testimonials data.
+   - Created src/components/ui/TestimonialStack.tsx (React island) featuring:
+     • Stacked card layout with Framer Motion managing scale, y-offset, and opacity.
+     • Auto-advance carousel (5000ms) with hover-pause functionality.
+     • Drag gestures on the front card for manual swipe navigation.
+     • Dot indicators and prev/next buttons.
+   - Created src/components/sections/TestimonialsSection.tsx to render the TestimonialStack.
+   - Updated index.astro: Added TestimonialsSection after AchievementsSection.
+
+14. Step 13 completed — built Articles section with editorial row list layout:
+   - Created src/data/articles.ts with placeholder articles data.
+   - Created src/components/sections/ArticlesSection.tsx (React island) featuring:
+     • A clean editorial-style row layout without cards.
+     • Staggered entrance animations (opacity and x-offset) for each row.
+     • CSS hover effects for row background, text color, and border color.
+     • Framer Motion hover animations shifting the external link icon.
+     • A CSS Grid-based hover accordion to smoothly reveal article descriptions.
+   - Updated index.astro: Added ArticlesSection after TestimonialsSection.
+
+15. Step 14 completed — built GitHub section with Contribution Calendar:
+   - Installed `react-github-calendar`.
+   - Created src/components/sections/GithubSection.tsx featuring:
+     • Left Box rendering `react-github-calendar` configured with custom `theme` colors ranging from `#1A1A1A` to `#E8FF00`.
+     • Right Box rendering API-driven GitHub stats (Total Stars, Public Repos, Top Language) fetched dynamically using `useEffect`.
+   - Updated index.astro: Added GithubSection after ArticlesSection.
+
+16. Step 15 completed — built Languages & Interests section:
+   - Created src/data/languages.ts and src/data/interests.ts populated with the requested data.
+   - Created src/components/sections/LanguagesInterestsSection.tsx featuring:
+     • A 3-column bento-style box layout.
+     • Animated proficiency bars for languages (`framer-motion` interpolating width from 0% to the designated percentage).
+     • A 2x3 grid of `react-icons` for Interests with hover interactions.
+     • A Currently list highlighting active engagements.
+   - Updated index.astro: Added LanguagesInterestsSection after GithubSection.
+
+17. Built "About My Github" Section:
+   - Adapted the provided raw Tailwind snippet into `src/components/sections/GithubInfoSection.tsx`.
+   - Re-styled the layout to strictly follow the portfolio's `#0A0A0A` background, `#E8FF00` electric yellow accents, and typography.
+   - Added `framer-motion` entrance animations.
+   - Inserted it into `index.astro` right below the main GithubSection.
+
+18. Step 16 completed — built Contact section with EmailJS form:
+   - Configured `.env` with `PUBLIC_EMAILJS_SERVICE_ID`, `PUBLIC_EMAILJS_TEMPLATE_ID`, and `PUBLIC_EMAILJS_USER_ID`.
+   - Built `src/components/sections/ContactSection.tsx` featuring:
+     • A 2-column layout (Contact details/links on the left, Form on the right).
+     • Functional `emailjs.sendForm` integration with state tracking (idle, loading, success, error).
+     • Focus-state UI highlighting for the form fields.
+   - Replaced the placeholder in `index.astro` with the fully functional Contact component.
+
+================================================================================
+
+19. Step 17 completed — Assemble sections and navigation:
+   - Updated `src/pages/index.astro` to properly order sections.
+   - Updated `NavBar.tsx` and `Footer.tsx` with working anchor links (`#about`, `#work`, `#skills`, `#experience`, `#contact`).
+   - Verified smooth scrolling to matching section IDs.
+
+20. Step 18 completed — Performance pass:
+   - Validated that the slow Spline bundle was previously replaced with a native highly performant `<canvas>` `AnimatedHeroBackground`.
+   - Verified fast LCP and zero layout shifts.
+   - Updated canonical URLs and favicons in `BaseLayout.astro`.
+
+21. Step 19 completed — Responsive pass:
+   - Verified that `clamp()` scaling works correctly across mobile breakpoints.
+   - Verified `HorizontalScroll` and `grid-cols-1` wrapping behaviors for mobile views.

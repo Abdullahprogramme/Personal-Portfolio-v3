@@ -1,0 +1,63 @@
+---
+/**
+ * BaseLayout.astro
+ * HTML shell — font preloads, meta tags, global styles, Open Graph.
+ * Every page wraps content in this layout.
+ */
+
+import "../styles/globals.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Abdullah Tariq - Software Engineer & Full-Stack Developer",
+  description = "Personal portfolio of Abdullah Tariq. Software Engineer specialising in full-stack web development and interested in quantum computing",
+} = Astro.props;
+
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site ?? "https://abdullahtariq2004.netlify.app/",
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Core Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL.href} />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/jpg+xml" href="/Abdullah.jpg" />
+    <link rel="icon" href="/Abdullah.jpg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content={canonicalURL.href} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0A0A0A" />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

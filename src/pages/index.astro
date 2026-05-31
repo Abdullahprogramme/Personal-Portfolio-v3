@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NavBar from "../components/layout/NavBar.tsx";
+import Footer from "../components/layout/Footer.tsx";
+import HeroSection from "../components/sections/HeroSection.tsx";
+import AboutSection from "../components/sections/AboutSection.tsx";
+import SkillsSection from "../components/sections/SkillsSection.tsx";
+import EducationSection from "../components/sections/EducationSection.tsx";
+import ExperienceSection from "../components/sections/ExperienceSection.tsx";
+import CertificationsSection from "../components/sections/CertificationsSection.tsx";
+import WorkSection from "../components/sections/WorkSection.tsx";
+import AchievementsSection from "../components/sections/AchievementsSection.tsx";
+import TestimonialsSection from "../components/sections/TestimonialsSection.tsx";
+import ArticlesSection from "../components/sections/ArticlesSection.tsx";
+import GithubSection from "../components/sections/GithubSection.tsx";
+import GithubInfoSection from "../components/sections/GithubInfoSection.tsx";
+import LanguagesInterestsSection from "../components/sections/LanguagesInterestsSection.tsx";
+import ContactSection from "../components/sections/ContactSection.tsx";
+---
+
+<BaseLayout>
+  <!-- NavBar — React island, loads immediately for initial animation -->
+  <NavBar client:load />
+
+  <main style="padding-top: 56px;">
+    <!-- Hero — React island, full page-load sequence -->
+    <HeroSection client:load />
+
+    <!-- About — React island, loads immediately for scroll-triggered animations -->
+    <AboutSection client:load />
+
+    <!-- Education — React island with Timeline -->
+    <EducationSection client:load />
+
+    <!-- Work — React island with grid/scroll toggle -->
+    <WorkSection client:load />
+
+    <!-- Testimonials — React island with Stacked Cards -->
+    <TestimonialsSection client:load />
+
+    <!-- Skills — React island with tab interface and animated grid -->
+    <SkillsSection client:load />
+
+    <!-- Experience — React island with Timeline -->
+    <ExperienceSection client:load />
+
+    <!-- Languages & Interests — React island with animated bars and icon grids -->
+    <LanguagesInterestsSection client:load />
+
+    <!-- Certifications — React island with HorizontalScroll -->
+    <CertificationsSection client:load />
+
+    <!-- Achievements — React island with Bento Grid -->
+    <AchievementsSection client:load />
+
+    <!-- Articles — React island with Editorial Rows -->
+    <ArticlesSection client:load />
+
+    <!-- GitHub — React island with Contribution Calendar and API Stats -->
+    <GithubSection client:load />
+
+    <!-- GitHub Info — React island with adapted features list -->
+    <GithubInfoSection client:load />
+
+    <!-- Contact — React island with EmailJS Form -->
+    <ContactSection client:load />
+  </main>
+
+  <!-- Footer — React island, loads when visible -->
+  <Footer client:visible />
+</BaseLayout>

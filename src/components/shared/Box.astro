@@ -1,0 +1,61 @@
+---
+/**
+ * Box.astro
+ * Base box component — the fundamental building block of the portfolio.
+ * Rectangular, no rounded corners, solid fill, strong border.
+ * On hover: border transitions to accent colour over 200ms.
+ *
+ * Usage:
+ *   <Box>Content</Box>
+ *   <Box padding="lg" hover={false}>No hover effect</Box>
+ *   <Box as="article">Semantic HTML</Box>
+ */
+
+interface Props {
+  /** Padding size: "default" or "lg" (featured cards) */
+  padding?: "default" | "lg";
+  /** Enable hover border-accent transition (default: true) */
+  hover?: boolean;
+  /** HTML element to render (default: div) */
+  as?: string;
+  /** Additional CSS classes */
+  class?: string;
+  /** Any additional HTML attributes */
+  [key: string]: any;
+}
+
+const {
+  padding = "default",
+  hover = true,
+  as: Tag = "div",
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+// Use clamp for responsive padding
+const paddingValue = padding === "lg" ? "clamp(20px, 4vw, 32px)" : "clamp(16px, 3.5vw, 24px)";
+---
+
+<Tag
+  class:list={[
+    "box-component",
+    hover && "box-hoverable",
+    className,
+  ]}
+  style={`
+    background-color: #111111;
+    border: 1px solid #333333;
+    border-radius: 0;
+    padding: ${paddingValue};
+    transition: border-color 0.2s ease;
+  `}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  .box-hoverable:hover {
+    border-color: #E8FF00 !important;
+  }
+</style>

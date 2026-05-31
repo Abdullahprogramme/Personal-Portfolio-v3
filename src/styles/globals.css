@@ -1,0 +1,205 @@
+/* ============================================================================
+   GLOBALS.CSS — Design System & Base Resets
+   Portfolio — Astro + Tailwind CSS v4 + Motion
+   ============================================================================ */
+
+/* Tailwind CSS v4 */
+@import "tailwindcss";
+
+/* Fontsource — self-hosted Google Fonts via npm */
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/500.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+/* ============================================================================
+   Tailwind v4 Theme — Design Tokens
+   ============================================================================ */
+
+@theme {
+  /* --------------------------------------------------------------------------
+     Colour Palette — Primary
+     -------------------------------------------------------------------------- */
+  --color-bg-base: #0A0A0A;
+  --color-bg-surface: #111111;
+  --color-bg-elevated: #1A1A1A;
+  --color-bg-box: #141414;
+
+  --color-text-primary: #F0F0F0;
+  --color-text-secondary: #A0A0A0;
+  --color-text-muted: #555555;
+
+  --color-accent: #E8FF00;
+  --color-accent-dark: #B8CC00;
+
+  --color-border-default: #222222;
+  --color-border-strong: #333333;
+  --color-border-accent: #E8FF00;
+
+  /* --------------------------------------------------------------------------
+     Colour Palette — Semantic
+     -------------------------------------------------------------------------- */
+  --color-success: #39FF14;
+  --color-warning: #FF9500;
+  --color-error: #FF3B30;
+  --color-info: #0A84FF;
+
+  /* --------------------------------------------------------------------------
+     Typography — Font Families
+     -------------------------------------------------------------------------- */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Montserrat", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* ============================================================================
+   CSS Custom Properties (non-Tailwind usage)
+   ============================================================================ */
+
+:root {
+  /* Primary palette */
+  --bg-base: #0A0A0A;
+  --bg-surface: #111111;
+  --bg-elevated: #1A1A1A;
+  --bg-box: #141414;
+
+  --text-primary: #F0F0F0;
+  --text-secondary: #A0A0A0;
+  --text-muted: #555555;
+
+  --accent: #E8FF00;
+  --accent-dark: #B8CC00;
+
+  --border-default: #222222;
+  --border-strong: #333333;
+  --border-accent: #E8FF00;
+
+  /* Semantic */
+  --color-success: #39FF14;
+  --color-warning: #FF9500;
+  --color-error: #FF3B30;
+  --color-info: #0A84FF;
+
+  /* Typography */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Montserrat", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* ============================================================================
+   Base Resets
+   ============================================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-base);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   Typography Base
+   -------------------------------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   Utility Resets
+   -------------------------------------------------------------------------- */
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* --------------------------------------------------------------------------
+   Scrollbar Styling
+   -------------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) var(--bg-base);
+}
+
+/* --------------------------------------------------------------------------
+   Selection
+   -------------------------------------------------------------------------- */
+
+::selection {
+  background-color: var(--accent);
+  color: var(--bg-base);
+}

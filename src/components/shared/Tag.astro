@@ -1,0 +1,36 @@
+---
+/**
+ * Tag.astro
+ * Skill / tech tag chip used in Education, Experience, and Work sections.
+ * Flat rectangular chip: bg-surface, border-strong, muted text, monospace.
+ *
+ * Usage:
+ *   <Tag>TypeScript</Tag>
+ *   <Tag variant="accent">Featured</Tag>
+ */
+
+interface Props {
+  /** "default" = muted style, "accent" = accent border + text */
+  variant?: "default" | "accent";
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const { variant = "default", class: className = "" } = Astro.props;
+
+const variantClasses = {
+  default: "bg-bg-surface border-border-strong text-text-secondary",
+  accent: "bg-bg-base border-border-accent text-accent",
+};
+---
+
+<span
+  class:list={[
+    "inline-block font-mono text-xs px-2.5 py-1 border rounded-none",
+    "transition-colors duration-150",
+    variantClasses[variant],
+    className,
+  ]}
+>
+  <slot />
+</span>
