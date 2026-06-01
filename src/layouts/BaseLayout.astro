@@ -58,6 +58,8 @@ const canonicalURL = new URL(
   </head>
 
   <body>
-    <slot />
+    <div style="overflow-x: clip; width: 100%; position: relative;">
+      <slot />
+    </div>
   </body>
 </html>
