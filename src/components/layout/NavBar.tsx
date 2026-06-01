@@ -20,15 +20,6 @@ export default function NavBar() {
   const [activeLink, setActiveLink] = useState<string>("#about");
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -95,10 +86,10 @@ export default function NavBar() {
       >
         <div
           style={{
-            height: isMobile ? "56px" : "64px",
+            height: "clamp(56px, 6vw, 64px)",
             maxWidth: "1200px",
             margin: "0 auto",
-            padding: isMobile ? "0 16px" : "0 clamp(24px, 3vw, 40px)",
+            padding: "0 clamp(16px, 5vw, 40px)",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -126,15 +117,8 @@ export default function NavBar() {
           </motion.a>
 
           {/* Desktop nav links */}
-          {!isMobile && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "24px",
-              }}
-            >
-              {NAV_LINKS.map((link, i) => (
+          <div className="hidden md:flex items-center gap-[24px]">
+            {NAV_LINKS.map((link, i) => (
                 <motion.a
                   key={link.href}
                   href={link.href}
@@ -211,27 +195,15 @@ export default function NavBar() {
                 HIRE ME
               </motion.a>
             </div>
-          )}
 
           {/* Mobile menu button */}
-          {isMobile && (
-            <motion.button
-              onClick={() => setDrawerOpen(!drawerOpen)}
-              whileTap={{ scale: 0.9 }}
-              aria-label={drawerOpen ? "Close menu" : "Open menu"}
-              style={{
-                width: "40px",
-                height: "40px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#F0F0F0",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              <AnimatePresence mode="wait">
+          <motion.button
+            className="flex md:hidden items-center justify-center w-[40px] h-[40px] text-[#F0F0F0] bg-transparent border-none cursor-pointer"
+            onClick={() => setDrawerOpen(!drawerOpen)}
+            whileTap={{ scale: 0.9 }}
+            aria-label={drawerOpen ? "Close menu" : "Open menu"}
+          >
+            <AnimatePresence mode="wait">
                 {drawerOpen ? (
                   <motion.div
                     key="close"
@@ -253,9 +225,8 @@ export default function NavBar() {
                     <HiOutlineMenuAlt3 size={24} />
                   </motion.div>
                 )}
-              </AnimatePresence>
-            </motion.button>
-          )}
+            </AnimatePresence>
+          </motion.button>
         </div>
       </motion.nav>
 
