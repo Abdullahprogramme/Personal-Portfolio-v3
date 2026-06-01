@@ -104,8 +104,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
-  width: 100%;
 }
 
 body {
@@ -115,7 +113,6 @@ body {
   color: var(--text-primary);
   background-color: var(--bg-base);
   overflow-x: hidden;
-  width: 100%;
   min-height: 100vh;
 }
 
