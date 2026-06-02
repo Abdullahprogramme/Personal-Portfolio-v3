@@ -56,7 +56,9 @@ export default function AnimatedLightningBackground() {
       }
     }
 
-    const numNodes = Math.min(Math.floor((width * height) / 30000), 20); // Scale with area, max 20
+    // Reduce max nodes on mobile screens
+    const maxNodes = width < 768 ? 10 : 20;
+    const numNodes = Math.min(Math.floor((width * height) / 30000), maxNodes); // Scale with area
     const nodes: Node[] = [];
     for (let i = 0; i < numNodes; i++) {
       nodes.push(new Node());
@@ -91,14 +93,18 @@ export default function AnimatedLightningBackground() {
       ctx.strokeStyle = `rgba(232, 255, 0, ${opacity * 0.5})`; // #E8FF00 but with dynamic opacity
       ctx.lineWidth = 2;
       
-      // Glow effect
-      ctx.shadowBlur = 10;
-      ctx.shadowColor = "#E8FF00";
+      // Glow effect - very expensive on mobile, only enable on desktop
+      if (width > 768) {
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "#E8FF00";
+      }
       
       ctx.stroke();
       
       // Reset glow to avoid performance drop
-      ctx.shadowBlur = 0;
+      if (width > 768) {
+        ctx.shadowBlur = 0;
+      }
     };
 
     const animate = () => {
