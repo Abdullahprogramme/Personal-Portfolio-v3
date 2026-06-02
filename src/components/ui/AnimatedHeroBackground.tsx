@@ -95,7 +95,9 @@ export default function AnimatedHeroBackground() {
     window.addEventListener("resize", resize);
 
     // ── Binary rain columns ──
-    const columnCount = Math.floor(w / 28);
+    // Decrease density on mobile screens
+    const columnDensity = w < 768 ? 50 : 28;
+    const columnCount = Math.floor(w / columnDensity);
     const columns: BinaryColumn[] = [];
     for (let i = 0; i < columnCount; i++) {
       const x = (i / columnCount) * w + Math.random() * 14;
@@ -114,7 +116,8 @@ export default function AnimatedHeroBackground() {
 
     // ── Floating wireframe cubes ──
     const cubes: Cube[] = [];
-    const cubeCount = Math.min(Math.floor(w / 200) + 2, 8);
+    const maxCubes = w < 768 ? 3 : 8;
+    const cubeCount = Math.min(Math.floor(w / 200) + 2, maxCubes);
     for (let i = 0; i < cubeCount; i++) {
       cubes.push({
         x: (Math.random() - 0.5) * w * 0.8,
