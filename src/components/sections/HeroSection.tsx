@@ -151,6 +151,7 @@ export default function HeroSection() {
         minHeight: "100svh",
         display: "flex",
         alignItems: "center",
+        paddingBottom: "72px",
       }}
     >
       {/* Animated geometric background */}
@@ -232,7 +233,7 @@ export default function HeroSection() {
           paddingLeft: "clamp(20px, 5vw, 48px)",
           paddingRight: "clamp(20px, 5vw, 48px)",
           paddingTop: "100px",
-          paddingBottom: "80px",
+          paddingBottom: "120px",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "640px" }}>
@@ -542,23 +543,27 @@ export default function HeroSection() {
 
       {/* ── Scroll Indicator ── */}
       <motion.button
+        type="button"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.5 }}
         onClick={handleScrollDown}
+        whileHover={{ color: "#E8FF00" }}
         style={{
           position: "absolute",
-          bottom: "24px",
+          bottom: "32px",
           left: "50%",
           transform: "translateX(-50%)",
           cursor: "pointer",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "6px",
+          gap: "8px",
           background: "none",
           border: "none",
-          padding: 0,
+          padding: "12px 20px",
+          zIndex: 20,
+          color: "#555555",
         }}
         aria-label="Scroll to next section"
       >
@@ -568,7 +573,8 @@ export default function HeroSection() {
             fontSize: "10px",
             textTransform: "uppercase",
             letterSpacing: "0.3em",
-            color: "#555555",
+            color: "inherit",
+            pointerEvents: "none",
           }}
         >
           SCROLL
@@ -576,8 +582,9 @@ export default function HeroSection() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          style={{ pointerEvents: "none" }}
         >
-          <HiOutlineChevronDown size={18} style={{ color: "#555555" }} />
+          <HiOutlineChevronDown size={18} style={{ color: "inherit" }} />
         </motion.div>
       </motion.button>
     </section>
