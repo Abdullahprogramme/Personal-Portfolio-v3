@@ -464,7 +464,7 @@ export default function HeroSection() {
             </motion.button>
 
             <motion.a
-              href="https://drive.google.com/file/d/1gBhMalaueKQXFUfaws_KRxPJGap5xeeP/view?usp=sharing"
+              href="https://drive.google.com/file/d/1q4EpR-NTxUQNsrqU6zy1S1SXHkc-Ehzi/view?usp=sharing"
               whileHover={{ y: -3, borderColor: "#E8FF00" }}
               whileTap={{ y: 1, scale: 0.98 }}
               style={{
