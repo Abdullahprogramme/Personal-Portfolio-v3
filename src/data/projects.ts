@@ -17,7 +17,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     description: "A website for the Computer Science Society of IBA Karachi, showcasing events, members, and activities.",
     category: "Full Stack",
     image: "",
-    tags: ["Next JS", "PostgreSQL", "Supabase", "MongoDB", "Tailwind CSS", "HTML", "CSS"],
+    tags: ["Next JS", "PostgreSQL", "Supabase", "Typescript", "Tailwind CSS", "HTML", "CSS"],
     liveUrl: "https://css.iba.edu.pk/",
     featured: true,
   },
