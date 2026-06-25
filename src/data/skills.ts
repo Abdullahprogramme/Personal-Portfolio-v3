@@ -1,21 +1,46 @@
 /**
  * skills.ts
  * Static skill data organised by category.
- * Icons reference react-icons/si (Simple Icons) identifiers.
  */
 
-export interface Skill {
+import type { ComponentType, CSSProperties } from "react";
+import {
+  SiHtml5,
+  SiCss,
+  SiJavascript,
+  SiTypescript,
+  SiPython,
+  SiCplusplus,
+  SiC,
+  SiReact,
+  SiNextdotjs,
+  SiAstro,
+  SiTailwindcss,
+  SiMui,
+  SiNodedotjs,
+  SiFlask,
+  SiGit,
+  SiGithub,
+  SiExpo,
+  SiLatex,
+  SiFirebase,
+  SiMongodb,
+  SiNetlify,
+  SiVercel,
+  SiDart,
+} from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
+import { FiMousePointer, FiZap } from "react-icons/fi";
+
+export interface SkillItem {
   name: string;
-  /** react-icons import name from 'react-icons/si' (or 'react-icons/fi' for fallbacks) */
-  iconName: string;
-  /** Icon pack: "si" for Simple Icons, "fi" for Feather, "vsc" for VS Code icons */
-  iconPack: "si" | "fi" | "vsc";
+  icon: ComponentType<{ size?: number; style?: CSSProperties }>;
 }
 
 export interface SkillCategory {
   id: string;
   label: string;
-  skills: Skill[];
+  skills: SkillItem[];
 }
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
@@ -23,48 +48,51 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     id: "languages",
     label: "Languages",
     skills: [
-      { name: "HTML", iconName: "SiHtml5", iconPack: "si" },
-      { name: "CSS", iconName: "SiCss3", iconPack: "si" },
-      { name: "JavaScript", iconName: "SiJavascript", iconPack: "si" },
-      { name: "TypeScript", iconName: "SiTypescript", iconPack: "si" },
-      { name: "Python", iconName: "SiPython", iconPack: "si" },
+      { name: "HTML", icon: SiHtml5 },
+      { name: "CSS", icon: SiCss },
+      { name: "JavaScript", icon: SiJavascript },
+      { name: "TypeScript", icon: SiTypescript },
+      { name: "Python", icon: SiPython },
+      { name: "C++", icon: SiCplusplus },
+      { name: "C", icon: SiC },
+      { name: "Dart", icon: SiDart },
     ],
   },
   {
     id: "frameworks",
     label: "Frameworks",
     skills: [
-      { name: "React", iconName: "SiReact", iconPack: "si" },
-      { name: "Next.js", iconName: "SiNextdotjs", iconPack: "si" },
-      { name: "Astro", iconName: "SiAstro", iconPack: "si" },
-      { name: "React Native", iconName: "SiReact", iconPack: "si" },
-      { name: "Tailwind CSS", iconName: "SiTailwindcss", iconPack: "si" },
-      { name: "Material UI", iconName: "SiMui", iconPack: "si" },
-      { name: "Node.js", iconName: "SiNodedotjs", iconPack: "si" },
-      { name: "Flask", iconName: "SiFlask", iconPack: "si" },
+      { name: "React", icon: SiReact },
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "Astro", icon: SiAstro },
+      { name: "React Native", icon: SiReact },
+      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "Material UI", icon: SiMui },
+      { name: "Node.js", icon: SiNodedotjs },
+      { name: "Flask", icon: SiFlask },
     ],
   },
   {
     id: "tools",
     label: "Tools",
     skills: [
-      { name: "Git", iconName: "SiGit", iconPack: "si" },
-      { name: "GitHub", iconName: "SiGithub", iconPack: "si" },
-      { name: "VS Code", iconName: "SiVisualstudiocode", iconPack: "si" },
-      { name: "Cursor", iconName: "FiMousePointer", iconPack: "fi" },
-      { name: "Antigravity", iconName: "FiZap", iconPack: "fi" },
-      { name: "Expo", iconName: "SiExpo", iconPack: "si" },
-      { name: "LaTeX", iconName: "SiLatex", iconPack: "si" },
+      { name: "Git", icon: SiGit },
+      { name: "GitHub", icon: SiGithub },
+      { name: "VS Code", icon: VscVscode },
+      { name: "Cursor", icon: FiMousePointer },
+      { name: "Antigravity", icon: FiZap },
+      { name: "Expo", icon: SiExpo },
+      { name: "LaTeX", icon: SiLatex },
     ],
   },
   {
     id: "platforms",
     label: "Platforms",
     skills: [
-      { name: "Firebase", iconName: "SiFirebase", iconPack: "si" },
-      { name: "MongoDB", iconName: "SiMongodb", iconPack: "si" },
-      { name: "Netlify", iconName: "SiNetlify", iconPack: "si" },
-      { name: "Vercel", iconName: "SiVercel", iconPack: "si" },
+      { name: "Firebase", icon: SiFirebase },
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "Netlify", icon: SiNetlify },
+      { name: "Vercel", icon: SiVercel },
     ],
   },
 ];
