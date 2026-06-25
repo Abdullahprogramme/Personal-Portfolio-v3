@@ -27,7 +27,7 @@ const CURRENTLY = [
   {
     icon: FaComputer,
     label: "Currently playing",
-    value: "Resident Evil 9: Requiem",
+    value: "007 First Light",
   },
 ];
 
