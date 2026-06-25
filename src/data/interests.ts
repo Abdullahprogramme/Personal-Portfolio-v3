@@ -23,5 +23,5 @@ export interface CurrentlyItem {
 export const CURRENTLY_DATA: CurrentlyItem[] = [
   { category: "LEARNING", item: "Quantum Computing"},
   { category: "READING", item: "Homo Deus: A Brief History of Tomorrow" },
-  { category: "PLAYING", item: "Resident Evil 9: Requiem" },
+  { category: "PLAYING", item: "007 First Light" },
 ];
