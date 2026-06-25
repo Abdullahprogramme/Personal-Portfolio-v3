@@ -17,7 +17,7 @@ export const ACHIEVEMENTS_DATA: AchievementItem[] = [
     id: "a1",
     type: "large",
     title: "Deans List",
-    description: "Four consecutive semesters I have been in the deans list with a GPA of 3.6 or above.",
+    description: "Four consecutive semesters I have been in the deans list with a GPA of 3.5 or above.",
     date: "2024 - 2026",
     icon: FiTarget,
   },
