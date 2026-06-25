@@ -28,6 +28,7 @@ import {
   SiNetlify,
   SiVercel,
   SiDart,
+  SiAndroidstudio,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 import { FiMousePointer, FiZap } from "react-icons/fi";
@@ -93,6 +94,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
       { name: "MongoDB", icon: SiMongodb },
       { name: "Netlify", icon: SiNetlify },
       { name: "Vercel", icon: SiVercel },
+      { name: "Android Studio", icon: SiAndroidstudio },
     ],
   },
 ];
