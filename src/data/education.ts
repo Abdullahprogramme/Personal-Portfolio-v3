@@ -13,7 +13,7 @@ export const EDUCATION_DATA: EducationItem[] = [
     year: "2024 — 2028",
     degree: "BS Computer Science",
     institution: "Institute of Business Administration (IBA)",
-    gpa: "GPA: 3.63 / 4.0",
+    gpa: "GPA: 3.56 / 4.0",
     tags: ["Data Structures", "Algorithms", "Computational Thinking", "Computer Architecture", "Object Oriented Programming"],
   },
   {
