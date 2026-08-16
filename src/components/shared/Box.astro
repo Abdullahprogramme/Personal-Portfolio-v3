@@ -33,15 +33,12 @@ const {
 } = Astro.props;
 
 // Use clamp for responsive padding
-const paddingValue = padding === "lg" ? "clamp(20px, 4vw, 32px)" : "clamp(16px, 3.5vw, 24px)";
+const paddingValue =
+  padding === "lg" ? "clamp(20px, 4vw, 32px)" : "clamp(16px, 3.5vw, 24px)";
 ---
 
 <Tag
-  class:list={[
-    "box-component",
-    hover && "box-hoverable",
-    className,
-  ]}
+  class:list={["box-component", hover && "box-hoverable", className]}
   style={`
     background-color: #111111;
     border: 1px solid #333333;
@@ -56,6 +53,6 @@ const paddingValue = padding === "lg" ? "clamp(20px, 4vw, 32px)" : "clamp(16px, 
 
 <style>
   .box-hoverable:hover {
-    border-color: #E8FF00 !important;
+    border-color: #e8ff00 !important;
   }
 </style>

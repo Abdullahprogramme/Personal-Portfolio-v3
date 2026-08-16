@@ -4,7 +4,6 @@ export interface TestimonialItem {
   author: string;
   role: string;
   company: string;
-  avatarUrl?: string;
 }
 
 export const TESTIMONIALS_DATA: TestimonialItem[] = [
@@ -14,6 +13,5 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
     author: "SyncX PVT LTD",
     role: "Client",
     company: "",
-    avatarUrl: "",
   }
 ];

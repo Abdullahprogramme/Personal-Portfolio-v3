@@ -117,7 +117,7 @@ export default function NavBar() {
           </motion.a>
 
           {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-[24px]">
+          <div className="hidden md:flex items-center gap-6">
             {NAV_LINKS.map((link, i) => (
                 <motion.a
                   key={link.href}
@@ -198,7 +198,7 @@ export default function NavBar() {
 
           {/* Mobile menu button */}
           <motion.button
-            className="flex md:hidden items-center justify-center w-[40px] h-[40px] text-[#F0F0F0] bg-transparent border-none cursor-pointer"
+            className="flex md:hidden items-center justify-center w-10 h-10 text-text-primary bg-transparent border-none cursor-pointer"
             onClick={() => setDrawerOpen(!drawerOpen)}
             whileTap={{ scale: 0.9 }}
             aria-label={drawerOpen ? "Close menu" : "Open menu"}

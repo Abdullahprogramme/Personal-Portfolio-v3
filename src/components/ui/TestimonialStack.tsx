@@ -139,17 +139,9 @@ export default function TestimonialStack() {
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "32px", position: "relative", zIndex: 10 }}>
-                  {testimonial.avatarUrl ? (
-                    <img 
-                      src={testimonial.avatarUrl} 
-                      alt={testimonial.author} 
-                      style={{ width: "48px", height: "48px", objectFit: "cover", border: "1px solid #333333" }} 
-                    />
-                  ) : (
-                    <div style={{ width: "48px", height: "48px", backgroundColor: "#0A0A0A", border: "1px solid #333333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555555", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700 }}>
-                      {testimonial.author.charAt(0)}
-                    </div>
-                  )}
+                  <div style={{ width: "48px", height: "48px", backgroundColor: "#0A0A0A", border: "1px solid #333333", display: "flex", alignItems: "center", justifyContent: "center", color: "#555555", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700 }}>
+                    {testimonial.author.charAt(0)}
+                  </div>
                   <div>
                     <h4 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "20px", color: "#F0F0F0", fontWeight: 700 }}>
                       {testimonial.author}
