@@ -10,9 +10,22 @@ export interface ExperienceItem {
 
 export const EXPERIENCE_DATA: ExperienceItem[] = [
   {
-    id: "ta",
+    id: "ta-2",
+    year: "Aug - Dec 2026",
+    role: "Teachers Assistant at IBA for ITP",
+    company: "IBA Karachi",
+    badge: "PART TIME",
+    bullets: [
+      "Assisted the professor with grading assignments, quizzes, and exams.",
+      "Conducted lab sessions for students, providing guidance on practical assignments.",
+      "Helped students with their assignments, quizzes, and exams.",
+    ],
+    tags: ["Python", "Rubrics", "IBA Karachi", "Teaching", "Introduction to Programming"],
+  },
+  {
+    id: "ta-1",
     year: "Jan - May 2026",
-    role: "Teachers Assistant at IBA",
+    role: "Teachers Assistant at IBA for OOP",
     company: "IBA Karachi",
     badge: "PART TIME",
     bullets: [
