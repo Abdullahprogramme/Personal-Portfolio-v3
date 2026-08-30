@@ -11,13 +11,31 @@ export interface ProjectItem {
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
+    id: "syncx-mp",
+    title: "SYNCX MarketPlace",
+    description: "A marketplace website for buying and selling accounts.",
+    category: "Full Stack",
+    tags: ["Astro", "React JS", "Tailwind CSS", "Shadcn UI", "Node.js", "Prisma", "PostgreSQL", "Supabase", "Railway", "Stripe", "Pino Logger", "Zod", "Sentry"],
+    githubUrl: "",
+    liveUrl: "https://syncx.gg/",
+    featured: true,
+  },
+  {
     id: "cs-society",
     title: "Computer Science Society Website",
     description: "A website for the Computer Science Society of IBA Karachi, showcasing events, members, and activities. Handled over a thousand registrations.",
     category: "Full Stack",
     tags: ["Next JS", "PostgreSQL", "Supabase", "Typescript", "Tailwind CSS", "HTML", "CSS"],
     liveUrl: "https://css.iba.edu.pk/",
-    featured: true,
+  },
+  {
+    id: "syncx",
+    title: "SYNCX",
+    description: "A computer accessories e-commerce website for buying products.",
+    category: "Full Stack",
+    tags: ["React JS", "Tailwind CSS", "HTML", "CSS"],
+    githubUrl: "",
+    liveUrl: "https://syncx.pk/",
   },
   {
     id: "graph-visualizer",
@@ -171,22 +189,4 @@ export const PROJECTS_DATA: ProjectItem[] = [
     tags: ["Flutter", "Dart", "MongoDB", "Node.js", "Express"],
     githubUrl: "https://github.com/Abdullahprogramme/wallet",
   },
-  {
-    id: "syncx",
-    title: "SYNCX",
-    description: "A computer accessories e-commerce website for buying products.",
-    category: "Full Stack",
-    tags: ["React JS", "Tailwind CSS", "HTML", "CSS"],
-    githubUrl: "",
-    liveUrl: "https://syncx.pk/",
-  },
-  {
-    id: "syncx-mp",
-    title: "SYNCX MarketPlace",
-    description: "A marketplace website for buying and selling accounts.",
-    category: "Full Stack",
-    tags: ["Astro", "React JS", "Tailwind CSS", "Node.js", "Prisma", "PostgreSQL", "Supabase", "Railway", "Stripe"],
-    githubUrl: "",
-    liveUrl: "https://syncx.gg/",
-  }
 ];
