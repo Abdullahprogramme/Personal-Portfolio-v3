@@ -29,6 +29,10 @@ import {
   SiVercel,
   SiDart,
   SiAndroidstudio,
+  SiMysql,
+  SiRailway,
+  SiRender,
+  SiSupabase,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 import { FiMousePointer, FiZap } from "react-icons/fi";
@@ -54,6 +58,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
       { name: "JavaScript", icon: SiJavascript },
       { name: "TypeScript", icon: SiTypescript },
       { name: "Python", icon: SiPython },
+      { name: "SQL", icon: SiMysql },
       { name: "C++", icon: SiCplusplus },
       { name: "C", icon: SiC },
       { name: "Dart", icon: SiDart },
@@ -94,6 +99,9 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
       { name: "MongoDB", icon: SiMongodb },
       { name: "Netlify", icon: SiNetlify },
       { name: "Vercel", icon: SiVercel },
+      { name: "Railway", icon: SiRailway },
+      { name: "Render", icon: SiRender },
+      { name: "Supabase", icon: SiSupabase },
       { name: "Android Studio", icon: SiAndroidstudio },
     ],
   },
