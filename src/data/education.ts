@@ -14,7 +14,7 @@ export const EDUCATION_DATA: EducationItem[] = [
     degree: "BS Computer Science",
     institution: "Institute of Business Administration (IBA)",
     gpa: "GPA: 3.56 / 4.0",
-    tags: ["Data Structures", "Algorithms", "Computational Thinking", "Computer Architecture", "Object Oriented Programming"],
+    tags: ["Data Structures", "Algorithms", "Computational Thinking", "Computer Architecture", "Object Oriented Programming", "Quantum Computing"],
   },
   {
     id: "quantum",
