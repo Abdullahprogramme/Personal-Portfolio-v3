@@ -102,29 +102,117 @@ function PhilosophyTags() {
   );
 }
 
+type TerminalStep = "command" | "executing" | "output" | "done";
+
+type OutputToken = {
+  text: string;
+  color?: string;
+};
+
+const TERMINAL_COMMAND = "> cat developer.json";
+
+const OUTPUT_TOKENS: OutputToken[] = [
+  { text: "{\n", color: "#555555" },
+  { text: '  "name"', color: "#A0A0A0" },
+  { text: ":", color: "#555555" },
+  { text: ' "Abdullah Tariq"', color: "#E8FF00" },
+  { text: ",\n", color: "#555555" },
+  { text: '  "role"', color: "#A0A0A0" },
+  { text: ":", color: "#555555" },
+  { text: ' "Full Stack Developer"', color: "#E8FF00" },
+  { text: ",\n", color: "#555555" },
+  { text: '  "focus"', color: "#A0A0A0" },
+  { text: ":", color: "#555555" },
+  { text: " [\n", color: "#555555" },
+  { text: '    "Next.js"', color: "#E8FF00" },
+  { text: ", ", color: "#555555" },
+  { text: '"TypeScript"', color: "#E8FF00" },
+  { text: ", ", color: "#555555" },
+  { text: '"Python"', color: "#E8FF00" },
+  { text: "\n", color: "#555555" },
+  { text: "  ]", color: "#555555" },
+  { text: ",\n", color: "#555555" },
+  { text: '  "hobby"', color: "#A0A0A0" },
+  { text: ":", color: "#555555" },
+  { text: ' "Algorithms, Coding, Table Tennis"', color: "#E8FF00" },
+  { text: "\n", color: "#555555" },
+  { text: "}", color: "#555555" },
+];
+
+function TerminalCursor() {
+  return (
+    <motion.span
+      animate={{ opacity: [1, 0, 1] }}
+      transition={{ duration: 0.8, repeat: Infinity }}
+      style={{ color: "#E8FF00", marginLeft: "4px" }}
+    >
+      █
+    </motion.span>
+  );
+}
+
 function TerminalBlock({ inView }: { inView: boolean }) {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState<TerminalStep>("command");
   const [typedCommand, setTypedCommand] = useState("");
-  const command = "> cat developer.json";
+  const [executingDots, setExecutingDots] = useState("");
+  const [visibleTokenCount, setVisibleTokenCount] = useState(0);
 
   useEffect(() => {
     if (!inView) return;
-    
-    let currentCommand = "";
-    let i = 0;
-    
-    const typeInterval = setInterval(() => {
-      if (i < command.length) {
-        currentCommand += command.charAt(i);
-        setTypedCommand(currentCommand);
-        i++;
-      } else {
-        clearInterval(typeInterval);
-        setTimeout(() => setStep(1), 300);
-      }
-    }, 60);
 
-    return () => clearInterval(typeInterval);
+    let commandIndex = 0;
+    let currentCommand = "";
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+    const intervals: ReturnType<typeof setInterval>[] = [];
+
+    const typeInterval = setInterval(() => {
+      if (commandIndex < TERMINAL_COMMAND.length) {
+        currentCommand += TERMINAL_COMMAND.charAt(commandIndex);
+        setTypedCommand(currentCommand);
+        commandIndex++;
+        return;
+      }
+
+      clearInterval(typeInterval);
+      timeouts.push(
+        setTimeout(() => {
+          setStep("executing");
+
+          let dotCount = 0;
+          const dotInterval = setInterval(() => {
+            dotCount = (dotCount % 3) + 1;
+            setExecutingDots(".".repeat(dotCount));
+          }, 350);
+          intervals.push(dotInterval);
+
+          timeouts.push(
+            setTimeout(() => {
+              clearInterval(dotInterval);
+              setStep("output");
+              setExecutingDots("");
+
+              let tokenIndex = 0;
+              const outputInterval = setInterval(() => {
+                tokenIndex++;
+                setVisibleTokenCount(tokenIndex);
+
+                if (tokenIndex >= OUTPUT_TOKENS.length) {
+                  clearInterval(outputInterval);
+                  timeouts.push(setTimeout(() => setStep("done"), 250));
+                }
+              }, 120);
+              intervals.push(outputInterval);
+            }, 1200)
+          );
+        }, 400)
+      );
+    }, 60);
+    intervals.push(typeInterval);
+
+    return () => {
+      intervals.forEach(clearInterval);
+      timeouts.forEach(clearTimeout);
+    };
   }, [inView]);
 
   return (
@@ -163,53 +251,37 @@ function TerminalBlock({ inView }: { inView: boolean }) {
         {/* Command */}
         <div style={{ color: "#F0F0F0" }}>
           {typedCommand}
-          {step === 0 && (
-            <motion.span
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ duration: 0.8, repeat: Infinity }}
-              style={{ color: "#E8FF00", marginLeft: "4px" }}
-            >
-              █
-            </motion.span>
-          )}
+          {step === "command" && <TerminalCursor />}
         </div>
-        
+
+        {/* Executing */}
+        {step === "executing" && (
+          <div style={{ marginTop: "12px", color: "#555555" }}>
+            {`... executing${executingDots}`}
+          </div>
+        )}
+
         {/* Output JSON */}
-        {step >= 1 && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            style={{ marginTop: "12px", color: "#A0A0A0" }}
-          >
-            <span style={{ color: "#555555" }}>{"{"}</span>
-            <br />
-            {"  "}<span style={{ color: "#A0A0A0" }}>"name"</span><span style={{ color: "#555555" }}>:</span> <span style={{ color: "#E8FF00" }}>"Abdullah Tariq"</span>,
-            <br />
-            {"  "}<span style={{ color: "#A0A0A0" }}>"role"</span><span style={{ color: "#555555" }}>:</span> <span style={{ color: "#E8FF00" }}>"Full Stack Developer"</span>,
-            <br />
-            {"  "}<span style={{ color: "#A0A0A0" }}>"focus"</span><span style={{ color: "#555555" }}>:</span> [
-            <br />
-            {"    "}<span style={{ color: "#E8FF00" }}>"Next.js"</span>, <span style={{ color: "#E8FF00" }}>"TypeScript"</span>, <span style={{ color: "#E8FF00" }}>"Python"</span>
-            <br />
-            {"  "}],
-            <br />
-            {"  "}<span style={{ color: "#A0A0A0" }}>"hobby"</span><span style={{ color: "#555555" }}>:</span> <span style={{ color: "#E8FF00" }}>"Algorithms, Coding"</span>
-            <br />
-            <span style={{ color: "#555555" }}>{"}"}</span>
+        {(step === "output" || step === "done") && (
+          <div style={{ marginTop: "12px" }}>
+            {OUTPUT_TOKENS.slice(0, visibleTokenCount).map((token, index) => (
+              <span key={index} style={{ color: token.color ?? "#A0A0A0" }}>
+                {token.text}
+              </span>
+            ))}
+            {step === "output" && <TerminalCursor />}
+          </div>
+        )}
+
+        {step === "done" && (
+          <>
             <br />
             <br />
             <div style={{ color: "#F0F0F0" }}>
               {"> "}
-              <motion.span
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-                style={{ color: "#E8FF00", marginLeft: "4px" }}
-              >
-                █
-              </motion.span>
+              <TerminalCursor />
             </div>
-          </motion.div>
+          </>
         )}
       </pre>
     </div>
