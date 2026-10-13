@@ -16,8 +16,11 @@ export default function GithubSection() {
     stars: 0,
     topLanguage: "N/A"
   });
+  const [calendarReady, setCalendarReady] = useState(false);
 
   useEffect(() => {
+    setCalendarReady(true);
+
     const fetchStats = async () => {
       try {
         const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
@@ -97,18 +100,22 @@ export default function GithubSection() {
             }}
           >
             <div style={{ width: "100%", overflowX: "auto" }}>
-              <div style={{ minWidth: "750px" }}>
-                <GitHubCalendar 
-                  username={GITHUB_USERNAME} 
-                  colorScheme="dark"
-                  theme={{
-                    dark: ['#1A1A1A', '#333333', '#666600', '#AACC00', '#E8FF00']
-                  }}
-                  fontSize={12}
-                  blockSize={12}
-                  blockMargin={4}
-                  style={{ fontFamily: "'JetBrains Mono', monospace", color: "#A0A0A0" }}
-                />
+              <div style={{ minWidth: "750px", minHeight: "180px", display: "flex", alignItems: "center" }}>
+                {calendarReady ? (
+                  <GitHubCalendar 
+                    username={GITHUB_USERNAME} 
+                    colorScheme="dark"
+                    theme={{
+                      dark: ['#1A1A1A', '#333333', '#666600', '#AACC00', '#E8FF00']
+                    }}
+                    fontSize={12}
+                    blockSize={12}
+                    blockMargin={4}
+                    style={{ fontFamily: "'JetBrains Mono', monospace", color: "#A0A0A0" }}
+                  />
+                ) : (
+                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "12px", color: "#555555" }}>LOADING CONTRIBUTIONS...</span>
+                )}
               </div>
             </div>
           </motion.div>
