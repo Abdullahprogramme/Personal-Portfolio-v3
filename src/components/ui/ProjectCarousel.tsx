@@ -8,7 +8,7 @@ type Category = "All" | "React JS" | "Full Stack" | "Python" | "React Native" | 
 const CATEGORIES: Category[] = ["All", "React JS", "Full Stack", "Python", "React Native", "Flutter"];
 
 export default function ProjectCarousel() {
-  const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [activeCategory, setActiveCategory] = useState<Category>("React JS");
   const [viewMode, setViewMode] = useState<"grid" | "scroll">("grid");
   const [viewportWidth, setViewportWidth] = useState(1024);
   
