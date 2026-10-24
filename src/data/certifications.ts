@@ -70,4 +70,12 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     date: "Issued Dec 2025",
     link: "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Ftinyurl.com%2Fmr343jvy&urlhash=G5N2&mt=3LTNh09wRhk50hL3308g_MD5dDTxcSC209CWx09IXNt_SoiKxmQjWGS10zeybL8xiJKQIdGSvFl5e5QBnoD7qV4onEB3&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BAjpPn3CFSCm5ej%2BSProLVA%3D%3D",
   },
+  {
+    id: "adequate",
+    title: "ADEQUATE, Qureca",
+    issuer: "Qureca",
+    date: "Issued Oct 2026",
+    link: "#",
+  }
 ];
+
