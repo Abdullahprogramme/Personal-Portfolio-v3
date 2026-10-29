@@ -189,4 +189,12 @@ export const PROJECTS_DATA: ProjectItem[] = [
     tags: ["Flutter", "Dart", "MongoDB", "Node.js", "Express"],
     githubUrl: "https://github.com/Abdullahprogramme/wallet",
   },
+  {
+    id: "flutter-worklog",
+    title: "WorkLog",
+    description: "A work log app that allows users to track their work hours and tasks.",
+    category: "Flutter",
+    tags: ["Flutter", "Dart", "Local Storage"],
+    githubUrl: "https://github.com/Abdullahprogramme/work-log",
+  }
 ];
