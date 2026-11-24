@@ -4,11 +4,11 @@ import { PROJECTS_DATA, type ProjectItem } from "../../data/projects";
 import { FiGithub, FiExternalLink, FiGrid, FiMaximize } from "react-icons/fi";
 import HorizontalScroll from "./HorizontalScroll";
 
-type Category = "All" | "React JS" | "Full Stack" | "Python" | "React Native" | "Flutter" | "Other";
-const CATEGORIES: Category[] = ["All", "React JS", "Full Stack", "Python", "React Native", "Flutter"];
+type Category = "All" | "Frontend" | "Full Stack" | "Python" | "React Native" | "Flutter" | "Other";
+const CATEGORIES: Category[] = ["All", "Frontend", "Full Stack", "Python", "React Native", "Flutter"];
 
 export default function ProjectCarousel() {
-  const [activeCategory, setActiveCategory] = useState<Category>("React JS");
+  const [activeCategory, setActiveCategory] = useState<Category>("Frontend");
   const [viewMode, setViewMode] = useState<"grid" | "scroll">("grid");
   const [viewportWidth, setViewportWidth] = useState(1024);
   

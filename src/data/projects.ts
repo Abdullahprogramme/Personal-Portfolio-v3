@@ -2,7 +2,7 @@ export interface ProjectItem {
   id: string;
   title: string;
   description: string;
-  category: "React JS" | "Full Stack" | "Python" | "React Native" | "Flutter" | "Other";
+  category: "Frontend" | "Full Stack" | "Python" | "React Native" | "Flutter" | "Other";
   tags: string[];
   githubUrl?: string;
   liveUrl?: string;
@@ -29,6 +29,15 @@ export const PROJECTS_DATA: ProjectItem[] = [
     liveUrl: "https://css.iba.edu.pk/",
   },
   {
+    id: "gdg-iba",
+    title: "Google Developers Group IBA",
+    description: "A website for the Google Developers Group of IBA Karachi, showcasing events, members, and activities.",
+    category: "Frontend",
+    tags: ["Astro", "Typescript", "Tailwind CSS", "HTML", "CSS", "Shadcn UI", "Framer Motion"],
+    githubUrl: "https://github.com/Abdullahprogramme/GDG-IBA",
+    liveUrl: "hhttps://gdgoc-iba-peach.vercel.app/",
+  },
+  {
     id: "syncx",
     title: "SYNCX",
     description: "A computer accessories e-commerce website for buying products.",
@@ -41,7 +50,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "graph-visualizer",
     title: "Graph Visualizer",
     description: "A tool for making and visualizing graphs, allowing users to create and run algorithms on them.",
-    category: "React JS",
+    category: "Frontend",
     tags: ["Next JS", "Tailwind CSS", "HTML", "CSS", "Shadcn UI", "Cytoscape"],
     githubUrl: "https://github.com/Abdullahprogramme/Graph-Visualizer",
     liveUrl: "https://graphvizs.vercel.app/",
@@ -50,7 +59,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "fitbot",
     title: "Fitbot",
     description: "A chatbot that provides fitness-related advice and answers users' questions.",
-    category: "React JS",
+    category: "Frontend",
     tags: ["React JS", "Material-UI", "Gemini", "Firebase", "Tailwind CSS", "HTML", "CSS"],
     githubUrl: "https://github.com/Abdullahprogramme/Fitbot",
     liveUrl: "https://fit-bot.netlify.app/",
@@ -59,7 +68,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "movie-recommender",
     title: "Movie Recommender",
     description: "Offers personalized movie recommendations and details based on user preferences.",
-    category: "React JS",
+    category: "Frontend",
     tags: ["React JS", "Material-UI", "Tailwind CSS", "Firebase", "HTML", "CSS"],
     githubUrl: "https://github.com/Abdullahprogramme/Movie-Recommender",
     liveUrl: "https://cine-choice.netlify.app/",
@@ -68,7 +77,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "weather-app",
     title: "Weather App",
     description: "Check the weather of any city, including temperature, humidity, and forecasts for the next five days.",
-    category: "React JS",
+    category: "Frontend",
     tags: ["React JS", "Tailwind CSS", "Framer Motion", "HTML", "CSS"],
     githubUrl: "https://github.com/Abdullahprogramme/Weather-App",
     liveUrl: "https://skyswift.netlify.app",
@@ -77,7 +86,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "password-generator",
     title: "Password Generator",
     description: "An application that generates secure passwords based on user preferences like length and characters.",
-    category: "React JS",
+    category: "Frontend",
     tags: ["React JS", "Tailwind CSS", "Material-UI", "HTML", "CSS"],
     githubUrl: "https://github.com/Abdullahprogramme/Password_Generator",
     liveUrl: "https://passforge.netlify.app",
@@ -86,7 +95,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "web-editor",
     title: "Web Editor",
     description: "An online code editor that allows users to write, edit, and preview HTML and CSS code in real-time.",
-    category: "React JS",
+    category: "Frontend",
     tags: ["React JS", "Tailwind CSS", "HTML", "CSS"],
     githubUrl: "https://github.com/Abdullahprogramme/web_editor",
     liveUrl: "https://live-web-editor.netlify.app/",
@@ -95,7 +104,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     id: "bmi-calculator",
     title: "BMI Calculator",
     description: "A simple tool to calculate body mass index and offer personalized advice on maintaining a healthy BMI.",
-    category: "React JS",
+    category: "Frontend",
     tags: ["React JS", "Tailwind CSS", "HTML", "CSS"],
     githubUrl: "https://github.com/Abdullahprogramme/BMI-calculator",
     liveUrl: "https://check-body-mass-index.netlify.app/",
